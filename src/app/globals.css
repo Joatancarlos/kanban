@@ -24,6 +24,10 @@
   --color-white-light: #ffffff;
   --color-red: #EA5555;
   --color-red-light: #FF9898;
+
+  --heigth-header-and-aside: 60px;
+  --width-layout: 80vw;
+  --width-aside: calc( 100vw - var(--width-layout));
 }
 
 body {
