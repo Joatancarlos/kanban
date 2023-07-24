@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "salvar": "git add . && git commit -m 'salvando' && git push origin main"
   },
   "dependencies": {
     "eslint": "8.45.0",
