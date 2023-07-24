@@ -2,16 +2,16 @@
 
 :root {
   /* Light mode */
-  --color-primary: #c35fc7;
-  --color-primary-light: #a8a4ff;
-  --color-secondary: #000112;
-  --color-secondary-light: #20212c;
+  --color-light-primary: #635FC7;
+  --color-light-primary-light: #a8a4ff;
+  --color-light-secondary: #000112;
+  --color-light-secondary-light: #20212c;
 
   /* Dark mode */
-  --color-primary: #2B2C37;
-  --color-primary-light: #3E3F4E;
-  --color-secondary: #828FA3;
-  --color-secondary-light: #E4EBFA;
+  --color-dark-primary: #2B2C37;
+  --color-dark-primary-light: #3E3F4E;
+  --color-dark-secondary: #828FA3;
+  --color-dark-secondary-light: #E4EBFA;
 
   /* Common */
   --color-white: #F4F7FD;
@@ -22,4 +22,10 @@
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
