@@ -5,4 +5,29 @@
 .header {
   display: flex;
   justify-content: space-between;
+  width: 85vw;
+  height: 60px;
+}
+
+.asideContainer {
+  display: flex;
+  border: solid 1px red;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.asideContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+}
+
+.asideTitle {
+  display: flex;
+  color: var(--color-dark-primary);
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 }
