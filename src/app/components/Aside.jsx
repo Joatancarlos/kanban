@@ -15,7 +15,7 @@ export default function Aside() {
       </div>
       <div className={styles.asideContent}> 
         <div>
-          <h3 className={styles.asideTitle}>ALL BOARDS (3)</h3>
+          <h4 className={styles.asideTitle}>ALL BOARDS (3)</h4>
         </div>
         <AsideBoards />
       </div>

@@ -44,6 +44,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  /* align-items: flex-start; */
   height: 100%;
   width: var(--width-aside);
 }
@@ -63,13 +64,14 @@
 }
 
 .boardBtn, .boardsActive {
-  padding: 15px 25px;
+  padding: 15px 0;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  width: 90%;
 }
 
 .boardsActive {
+  margin-left: -30px;
+  padding-left: 30px;
   background-color: var(--color-light-primary);
   color: var(--color-white-light);
  }

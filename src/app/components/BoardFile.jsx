@@ -11,7 +11,7 @@ const Boards = ({title}) => {
   };
 
   return (
-    <div onClick={ active } className={isActive ? styles.boardBtn: styles.boardsActive}>
+    <div onClick={ active } className={isActive ? styles.boardsActive : styles.boardBtn}>
       <h4>
         {title}
       </h4>
