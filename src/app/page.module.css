@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.layoutMain {
+  width: 85vw;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -30,4 +34,25 @@
   justify-content: center;
   align-items: center;
   height: 50px;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.btns_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15vw;
+}
+
+.btn {
+  background-color: var(--color-light-primary);
+  color: var(--color-white-light);
+  border: none;
+  border-radius: 30px;
+  padding: 15px 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
 }
