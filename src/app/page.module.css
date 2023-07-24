@@ -6,18 +6,66 @@
   width: 85vw;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-}
+/* HEADER */
 
 .btns_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 15vw;
+}
+
+.header {
+  --heigth-header-and-aside: 60px;
+  display: flex;
+  justify-content: space-between;
+  height: var(--heigth-header-and-aside);
+}
+
+/* ASIDE */
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--heigth-header-and-aside);
+  margin: 35px 24px;
+  border: solid 1px red;
+}
+
+.asideContainer {
+  display: flex;
+  border: solid 1px red;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.asideContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.asideTitle {
+  display: flex;
+  color: var(--color-dark-primary);
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.darkMode {
+  display: flex;
+  justify-content: center;
+}
+
+.hideSidebar {
+  display: flex;
+  justify-content: center;
 }
 
 .btn {
