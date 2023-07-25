@@ -19,12 +19,8 @@ export default function Aside() {
         </div>
         <AsideBoards />
       </div>
-      <div>
         <DarkMode />
-      </div>
-      <div>
         <HideSidebar />
-      </div>
     </aside>
   )
 }

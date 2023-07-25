@@ -25,8 +25,8 @@
   --color-red: #EA5555;
   --color-red-light: #FF9898;
 
-  --heigth-header-and-aside: 60px;
-  --width-layout: 80vw;
+  --heigth-header-and-aside: 15.7vh;
+  --width-layout: 75vw;
   --width-aside: calc( 100vw - var(--width-layout));
 
   /* Fonts */
