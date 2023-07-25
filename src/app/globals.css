@@ -24,6 +24,24 @@
   --color-white-light: #ffffff;
   --color-red: #EA5555;
   --color-red-light: #FF9898;
+
+  --heigth-header-and-aside: 15.7vh;
+  --width-layout: 75vw;
+  --width-aside: calc( 100vw - var(--width-layout));
+
+  /* Fonts */
+
+  --font-size-xl: 1.5rem;
+  --line-height-xl: 1.8rem;
+
+  --font-size-l: 1.125rem;
+  --line-height-l: 1.5rem;
+
+  --font-size-m: .938rem;
+  --line-height-m: 1.187rem;
+
+  --font-size-s: .75rem;
+  --line-height-s: .938rem;
 }
 
 body {
@@ -34,4 +52,25 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-l);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-l);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  font-weight: 700;
 }

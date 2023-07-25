@@ -4,17 +4,12 @@ import Boards from './BoardFile';
 const AsideBoards = () => {
   return (
   <>
-
     <div className={styles.asideBoards}>
-      <Boards />
-    </div>
-
-    <div>
+      <Boards title="Platform Launch"/>
       <h4>
         +Create New Board
       </h4>
     </div>
-
   </>
   )
 };
