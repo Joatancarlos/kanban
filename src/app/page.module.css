@@ -225,7 +225,9 @@
 }
 
 .hiddenMain {
-  margin-left: -12vw;
+  position: absolute;
+  left: 0;
+  width: 100vw;
 }
 
 .emptyBoard {
