@@ -75,7 +75,7 @@
   flex-direction: column;
   justify-content: space-between;
   /* align-items: flex-start; */
-  max-width: var(--width-aside);
+  width: var(--width-aside);
   padding: 15px 25px;
   height: calc( 100vh - var(--heigth-header-and-aside));
 }
@@ -91,11 +91,13 @@
 .hideSidebar {
   display: flex;
   justify-content: flex-start;
-  padding: 15px 35px;
+  padding: 15px 0;
 }
 
 .buttonHideSidebar {
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 5px;
 }
 
@@ -128,11 +130,6 @@
   margin-right: 15px;
 }
 
-.darkMode {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .toogleContent {
   align-items: center;
@@ -141,7 +138,7 @@
   display: flex;
   justify-content: space-around;
   padding: 15px 35px;
-  width: 85%;
+  width: 100%;
 }
 
 /* Button toggle  */
@@ -264,3 +261,37 @@
   4 - width: 100%; no layoutMain
   5 - margin-left: -17vw; no main
 */
+
+.containerModal, .formAdd {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerModal {
+  padding: 15px;
+}
+
+/* .formAdd {
+  
+} */
+
+.input {
+  border: 1px solid var(--color-dark-secondary);
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.inputWithClose {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputWithClose .input {
+  width: 90%;
+}
+
+.formAdd .btn {
+  margin-top: 10px;
+}

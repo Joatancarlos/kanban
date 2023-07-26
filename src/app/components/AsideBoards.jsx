@@ -3,13 +3,20 @@ import styles from '../page.module.css';
 import Boards from './BoardFile';
 import incoBoard from '../../images/icon-board.svg';
 import Image from 'next/image';
+import useStore from '@/zustand/store';
 
 const AsideBoards = () => {
+  const [modalNewBoard, updateModalNewBoard] = useStore((state) => [
+    state.modalNewBoard, state.updateModalNewBoard
+  ]);
+
   return (
   <>
     <div className={styles.asideBoards}>
       <Boards title="Platform Launch"/>
-      <button>
+      <button
+        onClick={() => updateModalNewBoard(!modalNewBoard)}
+      >
         <Image src={incoBoard} alt="icon board" width={16} height={16} className={styles.iconBoard} />
         + Create New Board
       </button>
