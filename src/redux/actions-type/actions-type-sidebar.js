@@ -1,0 +1,5 @@
+const ACTION_TYPE_SIDEBAR = {
+  ISHIDDEN: 'ISHIDDEN',
+};
+
+export default ACTION_TYPE_SIDEBAR;

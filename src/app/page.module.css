@@ -1,26 +1,10 @@
 .layout {
   display: flex;
+  flex-direction: column;
 }
 
 .layoutMain {
-  width: var(--width-layout);
-}
-
-/* HEADER */
-
-.btns_header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 17vw;
-}
-
-.header {
-  align-items: center;
-  padding: 0 25px;
-  display: flex;
-  justify-content: space-between;
-  height: var(--heigth-header-and-aside);
 }
 
 .btn {
@@ -34,6 +18,33 @@
   transition: all 0.2s ease-in-out;
 }
 
+/* HEADER */
+
+.btns_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 17vw;
+}
+
+.header {
+  display: flex;
+}
+
+.header2 {
+  align-items: center;
+  display: flex;
+  padding: 0 25px;
+  justify-content: space-between;
+  width: 100vw;
+  height: var(--heigth-header-and-aside);
+}
+
+.btnElli {
+  padding: 2px;
+}
+
+
 /* ASIDE */
 
 .logo {
@@ -41,51 +52,63 @@
   align-items: center;
   justify-content: center;
   height: var(--heigth-header-and-aside);
-  border: solid 1px red;
+  width: calc( 9.5vw + var(--width-aside));
+  border-right: 2px solid var(--color-white);
 }
 
-.asideContainer {
+/* .asideContainer {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  height: 100vh;
+} */
+
+.asideTitle, .asideContent {
+  color: var(--color-dark-secondary);
+}
+
+.asideBoards button {
+  color: var(--color-light-primary);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
 }
 
 .asideContent {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  /* align-items: flex-start; */
-  height: 100%;
+  justify-content: space-between;
   width: var(--width-aside);
+  height: 84vh;
+  padding: 15px 25px;
 }
 
 .asideTitle {
-  display: flex;
-  color: var(--color-dark-primary);
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  align-items: center;
-  padding: 0 15px;
+  /* color: var(--color-dark-primary); */
+  padding-bottom: 20px;
 }
 
-.asideBoards {
+/* .asideBoards {
   padding: 15px 25px;
-}
+} */
 
 .boardBtn, .boardsActive {
   padding: 15px 0;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
+
 
 .boardsActive {
   margin-left: -30px;
   padding-left: 30px;
   background-color: var(--color-light-primary);
   color: var(--color-white-light);
- }
+}
+
+.iconBoard {
+  margin-right: 15px;
+}
 
 .darkMode {
   display: flex;
@@ -188,6 +211,7 @@
 .main {
   background-color: var(--color-white);
   height: calc(100vh - var(--heigth-header-and-aside));
+  width: var(--width-layout);
   display: flex;
   justify-content: center;
   align-items: center;
