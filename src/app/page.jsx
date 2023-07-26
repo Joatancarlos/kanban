@@ -7,8 +7,8 @@ import useStore from '@/zustand/store';
 
 
 export default function Home() {
-  const [isHidden, updateHidden] = useStore((state) => 
-  [state.isHidden, state.updateHidden]
+  const [isHidden] = useStore((state) => 
+  [state.isHidden]
   );
   return (
     <div className={styles.layout}>

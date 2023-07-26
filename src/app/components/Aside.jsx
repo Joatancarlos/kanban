@@ -10,8 +10,8 @@ import useStore from '@/zustand/store';
 
 
 export default function Aside() {
-  const [isHidden, updateHidden] = useStore((state) => 
-  [state.isHidden, state.updateHidden]
+  const [isHidden] = useStore((state) => 
+  [state.isHidden]
   );
   return (
     <aside className={isHidden ? styles.hiddenAsideContainer : ''}>

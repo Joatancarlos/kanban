@@ -23,9 +23,9 @@ export default function Main() {
         <button
           type='button'
           onClick={() => updateHidden(!isHidden)}
-          style={ isHidden ?  {display: 'block'} : {display: 'none'}}
+          className={ isHidden ?  styles.showBtn : styles.hideBtn}
         >
-          <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={20} priority />
+          <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={15} priority />
         </button>
 
         </div>
