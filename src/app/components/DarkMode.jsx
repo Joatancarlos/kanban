@@ -7,7 +7,7 @@ import sunLight from '../../images/icon-light-theme.svg';
 import Image from 'next/image'; 
 
 const DarkMode = () => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   return (
     <div className={styles.darkMode}>

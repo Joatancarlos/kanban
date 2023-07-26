@@ -15,12 +15,16 @@ export default function Aside() {
       </div>
       <div className={styles.asideContent}> 
         <div>
-          <h4 className={styles.asideTitle}>ALL BOARDS (3)</h4>
+          <div>
+            <h4 className={styles.asideTitle}>ALL BOARDS (3)</h4>
+          </div>
+          <AsideBoards />
         </div>
-        <AsideBoards />
+        <div>
+          <DarkMode />
+          <HideSidebar />
+        </div>
       </div>
-        <DarkMode />
-        <HideSidebar />
     </aside>
   )
 }

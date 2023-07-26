@@ -6,7 +6,7 @@ import Image from 'next/image';
 import styles from '../page.module.css';
 
 const HideSidebar = () => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   return (
     <div className={styles.hideSidebar}>
       <div className={styles.sidebarContentHide}>
