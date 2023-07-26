@@ -75,7 +75,7 @@
   flex-direction: column;
   justify-content: space-between;
   /* align-items: flex-start; */
-  width: var(--width-aside);
+  max-width: var(--width-aside);
   padding: 15px 25px;
   height: calc( 100vh - var(--heigth-header-and-aside));
 }
