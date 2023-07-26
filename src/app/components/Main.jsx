@@ -3,15 +3,11 @@ import Image from 'next/image';
 import useStore from '@/zustand/store';
 import styles from '../page.module.css'
 import hideSidebarEyeOpen from '../../images/icon-show-sidebar.svg';
-import dataJson from '../../../data.json';
-import NewBoard from './newBoards/NewBoard';
 
 export default function Main() {
   const [isHidden, updateHidden] = useStore((state) => [
     state.isHidden, state.updateHidden
   ]);
-
-  const { boards } = dataJson;
 
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
@@ -32,7 +28,6 @@ export default function Main() {
           <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={15} priority />
         </button>
         </div>
-        <NewBoard />
     </main>
   )
 }

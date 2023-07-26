@@ -25,9 +25,13 @@ function NewBoard() {
         onRequestClose={fecharModal}
         contentLabel="Modal de exemplo"
       >
-        <h2>Olá</h2>
+        <h2>add new task</h2>
         <button onClick={fecharModal}>Fechar</button>
-        <div>Eu sou uma modal</div>
+        <form>
+          <label>Title</label>
+          <input type="text" placeholder="e.g. Take coffee break" />
+
+        </form>
       </Modal>
     </div>
   );
