@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 const useStore = create((set) => ({
-  isHidden: true,
+  isHidden: false,
   updateHidden: (hidden) => set(() => ({ isHidden: hidden })),
 }))
 

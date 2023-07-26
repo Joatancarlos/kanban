@@ -10,7 +10,7 @@ export default function Main() {
   ]);
 
   return (
-    <main className={styles.main}>
+    <main className={isHidden ? styles.hiddenMain : styles.main}>
         <div className={styles.emptyBoard}>
           <p>This board is empty. Create a new column to get started.</p>
           <button className={styles.btn}>
@@ -23,6 +23,7 @@ export default function Main() {
         <button
           type='button'
           onClick={() => updateHidden(!isHidden)}
+          style={ isHidden ?  {display: 'block'} : {display: 'none'}}
         >
           <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={20} priority />
           <p>Hide Sidebar</p>

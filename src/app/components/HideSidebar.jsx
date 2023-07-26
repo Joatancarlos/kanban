@@ -8,8 +8,6 @@ const HideSidebar = () => {
   const [isHidden, updateHidden] = useStore((state) => 
   [state.isHidden, state.updateHidden]
   );
-
-  console.log(isHidden);
   return (
     <div className={styles.hideSidebar}>
       <div className={styles.sidebarContentHide}>

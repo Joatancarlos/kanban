@@ -6,6 +6,10 @@
   width: var(--width-layout);
 }
 
+.hiddenLayoutMain {
+  width: 100vw;
+}
+
 /* HEADER */
 
 .btns_header {
@@ -41,20 +45,20 @@
 
 /* ASIDE */
 
-.logo {
+.logo, .hiddenLogo {
   display: flex;
   align-items: center;
   justify-content: center;
   height: var(--heigth-header-and-aside);
-  /* border: solid 1px red; */
 }
 
-/* .asideContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100vh;
-} */
+.hiddenLogo {
+  padding: 0 40px;
+}
+
+.hiddenAsideContainer {
+  height: fit-content;
+}
 
 .asideTitle, .asideContent {
   color: var(--color-dark-secondary);
@@ -74,6 +78,10 @@
   width: var(--width-aside);
   padding: 15px 25px;
   height: calc( 100vh - var(--heigth-header-and-aside));
+}
+
+.hiddenAsideContent {
+  display: none;
 }
 
 .asideTitle {
@@ -199,7 +207,7 @@
 
 /* MAIN */
 
-.main {
+.main, .hiddenMain {
   background-color: var(--color-white);
   height: calc(100vh - var(--heigth-header-and-aside));
   display: flex;
@@ -208,9 +216,21 @@
   box-shadow: 0px 0px 2px -1px black;
 }
 
+.hiddenMain {
+  margin-left: -17vw;
+}
+
 .emptyBoard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 20vh;
 }
+
+/* PASSOS PARA ESCONDER O ASIDE
+  1 - display: none; no asideContent
+  2 - height: fit-content; no aside
+  3 - padding: 0 40px; na logo
+  4 - width: 100%; no layoutMain
+  5 - margin-left: -17vw; no main
+*/
