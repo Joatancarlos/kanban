@@ -34,6 +34,10 @@
   transition: all 0.2s ease-in-out;
 }
 
+.btnElli {
+  padding: 2px;
+}
+
 /* ASIDE */
 
 .logo {
@@ -51,6 +55,16 @@
   height: 100vh;
 }
 
+.asideTitle, .asideContent {
+  color: var(--color-dark-secondary);
+}
+
+.asideBoards button {
+  color: var(--color-light-primary);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+}
+
 .asideContent {
   display: flex;
   flex-direction: column;
@@ -58,6 +72,7 @@
   /* align-items: flex-start; */
   height: 100%;
   width: var(--width-aside);
+  padding: 15px 25px;
 }
 
 .asideTitle {
@@ -70,14 +85,16 @@
   padding: 0 15px;
 }
 
-.asideBoards {
+/* .asideBoards {
   padding: 15px 25px;
-}
+} */
 
 .boardBtn, .boardsActive {
   padding: 15px 0;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .boardsActive {
@@ -97,7 +114,9 @@
   justify-content: center;
 }
 
-
+.iconBoard {
+  margin-right: 15px;
+}
 
 .darkMode {
   display: flex;
