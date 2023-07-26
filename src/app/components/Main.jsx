@@ -26,7 +26,6 @@ export default function Main() {
           style={ isHidden ?  {display: 'block'} : {display: 'none'}}
         >
           <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={20} priority />
-          <p>Hide Sidebar</p>
         </button>
 
         </div>
