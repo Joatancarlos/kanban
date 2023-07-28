@@ -10,11 +10,11 @@ import useStore from '@/zustand/store';
 
 
 export default function Aside() {
-  const [isHidden] = useStore((state) => 
-  [state.isHidden]
+  const [isHidden, boards] = useStore((state) => 
+  [state.isHidden, state.boards]
   );
   return (
-    <aside className={isHidden ? styles.hiddenAsideContainer : ''}>
+    <aside className={isHidden ? styles.hiddenAsideContainer : styles.asideContainer}>
       
       <div className={isHidden ? styles.hiddenLogo : styles.logo}>
           <Image src={logoDark} alt="Kanban Logo" width={150} height={25} priority />
@@ -22,7 +22,7 @@ export default function Aside() {
       <div className={isHidden ? styles.hiddenAsideContent : styles.asideContent}> 
         <div>
           <div>
-            <h4 className={styles.asideTitle}>ALL BOARDS (3)</h4>
+            <h4 className={styles.asideTitle}>ALL BOARDS ({boards.length})</h4>
           </div>
           <AsideBoards />
         </div>

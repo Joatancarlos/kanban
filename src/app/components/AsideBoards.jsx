@@ -6,15 +6,20 @@ import Image from 'next/image';
 import useStore from '@/zustand/store';
 
 const AsideBoards = () => {
-  const [modalNewBoard, updateModalNewBoard] = useStore((state) => [
-    state.modalNewBoard, state.updateModalNewBoard
+  const [modalNewBoard, updateModalNewBoard, boards] = useStore((state) => [
+    state.modalNewBoard, state.updateModalNewBoard, state.boards
   ]);
 
   return (
   <>
     <div className={styles.asideBoards}>
-      <Boards title="Platform Launch"/>
+      <div className={styles.boards}>
+        {boards.map((board) =>  (
+          <Boards key={board.name} title={board.name}/>
+        ))}
+      </div>
       <button
+        className={styles.btnCreateBoard}
         onClick={() => updateModalNewBoard(!modalNewBoard)}
       >
         <Image src={incoBoard} alt="icon board" width={16} height={16} className={styles.iconBoard} />

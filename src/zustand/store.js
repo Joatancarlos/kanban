@@ -5,7 +5,7 @@ const useStore = create((set) => ({
   modalNewBoard: false,
   boards: [
     {
-      "name": "Platform Lounch",
+      "name": "Platform Launch",
       "columns": [
         {
           "name": "Todo",
