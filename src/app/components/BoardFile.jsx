@@ -12,7 +12,6 @@ const Boards = ({title}) => {
   [state.modalNewBoard, state.updateActualBoards , state.updateActualBoardId]
   );
   const [isActive, setIsActive] = useState(false);
-  // const [actualId, setActualId] = useState(0);
   const [boardLocal, setBoardLocal] = useState([]);
   useEffect(() => {
     const boards = getSavedBoards('board');
@@ -33,13 +32,15 @@ const Boards = ({title}) => {
   };
 
   return (
-    <div onClick={ active } className={isActive ? styles.boardsActive : styles.boardBtn}>
+    <div
+    onClick={ active }
+    className={isActive ? styles.boardsActive : styles.boardBtn}>
       <h4>
         <Image src={incoBoard} alt="icon board" width={16} height={16} className={styles.iconBoard} />
         {title}
       </h4>
     </div>
-  );
+);
 };
 
 export default Boards;

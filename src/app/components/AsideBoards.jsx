@@ -29,7 +29,10 @@ const AsideBoards = () => {
     <div className={styles.asideBoards}>
       <div className={styles.boards}>
         {boardLocal && boardLocal.map((board) =>  (
-            <Boards key={board.name} title={board.name}/>
+            <Boards 
+              key={board.name}
+              title={board.name}
+            />
           ))}
         
       </div>
