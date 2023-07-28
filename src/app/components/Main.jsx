@@ -1,35 +1,61 @@
 "use client";
+import { useEffect, useState } from 'react';
+import { getSavedBoards } from '@/helpers/boardLocal';
 import Image from 'next/image';
 import useStore from '@/zustand/store';
 import styles from '../page.module.css'
 import hideSidebarEyeOpen from '../../images/icon-show-sidebar.svg';
 import ModalNewBoard from './modals/ModalNewBoard';
+import Columns from './columns/Columns';
 
 export default function Main() {
-  const [isHidden, updateHidden, modalNewBoard] = useStore((state) => [
-    state.isHidden, state.updateHidden, state.modalNewBoard,
+  const [isHidden, updateHidden, modalNewBoard, actualBoardId] = useStore((state) => [
+    state.isHidden, state.updateHidden, state.modalNewBoard, state.actualBoardId, 
   ]);
+  const [boardLocal, setBoardLocal] = useState([]);
+  const [columns, setColumns] = useState([]);
 
-  console.log(modalNewBoard);
+  useEffect(() => {
+    const boards = getSavedBoards('board');
+    if (boards.length !== 0 && boards !== null) {
+      try {
+        setBoardLocal(boards)
+      } catch (error) {
+        console.error('Erro ao fazer parsing JSON:', error);
+      }
+    }
+  }, [modalNewBoard]);
 
+  useEffect(() => {
+    if (boardLocal.length !== 0) {
+      const board = boardLocal.find((board) => board.id === actualBoardId);
+      const columns = board.columns;
+      setColumns(columns);
+    }
+  }, [actualBoardId]);
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
-        <div className={styles.emptyBoard}>
+        {columns.length !== 0 ? (
+          <Columns columns={columns} />
+        ) : (
+          <div className={styles.emptyBoard}>
           <p>This board is empty. Create a new column to get started.</p>
           <button className={styles.btn}>
             + add new column
           </button>
         </div>
+        )} 
+        
 
         <div className={styles.sidebarContentHide}>
 
-        <button
-          type='button'
-          onClick={() => updateHidden(!isHidden)}
-          className={ isHidden ?  styles.showBtn : styles.hideBtn}
-        >
-          <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={15} priority />
-        </button>
+          <button
+            type='button'
+            onClick={() => updateHidden(!isHidden)}
+            className={ isHidden ?  styles.showBtn : styles.hideBtn}
+          >
+            <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={15} priority />
+          </button>
         </div>
         {modalNewBoard && (
           <ModalNewBoard 

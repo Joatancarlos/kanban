@@ -1,5 +1,7 @@
 "use client";
 import styles from '../page.module.css';
+import { useEffect, useState } from 'react';
+import { getSavedBoards } from '@/helpers/boardLocal';
 import Boards from './BoardFile';
 import incoBoard from '../../images/icon-board.svg';
 import Image from 'next/image';
@@ -9,14 +11,27 @@ const AsideBoards = () => {
   const [modalNewBoard, updateModalNewBoard, boards] = useStore((state) => [
     state.modalNewBoard, state.updateModalNewBoard, state.boards
   ]);
+  const [boardLocal, setBoardLocal] = useState([]);
+
+  useEffect(() => {
+    const boards = getSavedBoards('board');
+    if (boards.length !== 0 && boards !== null) {
+      try {
+        setBoardLocal(boards)
+      } catch (error) {
+        console.error('Erro ao fazer parsing JSON:', error);
+      }
+    }
+  }, [modalNewBoard]);
 
   return (
   <>
     <div className={styles.asideBoards}>
       <div className={styles.boards}>
-        {boards.map((board) =>  (
-          <Boards key={board.name} title={board.name}/>
-        ))}
+        {boardLocal && boardLocal.map((board) =>  (
+            <Boards key={board.name} title={board.name}/>
+          ))}
+        
       </div>
       <button
         className={styles.btnCreateBoard}

@@ -3,31 +3,12 @@ import { create } from 'zustand'
 const useStore = create((set) => ({
   isHidden: false,
   modalNewBoard: false,
-  boards: [
-    {
-      "name": "Platform Launch",
-      "columns": [
-        {
-          "name": "Todo",
-          "tasks": [
-            {
-              "title": "Plan Product Hunt launch",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "title": "Find hunter",
-                  "isCompleted": false
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-  ],
+  actualBoardId: 1,
+  actualBoards: {name: 'My board'},
   updateHidden: (hidden) => set(() => ({ isHidden: hidden })),
   updateModalNewBoard: (modalNewBoard) => set(() => ({ modalNewBoard: modalNewBoard })),
+  updateActualBoards: (boards) => set(() => ({ actualBoards: boards })),
+  updateActualBoardId: (id) => set(() => ({ actualBoardId: id })),
 }))
 
 export default useStore;

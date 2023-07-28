@@ -6,10 +6,10 @@ import verticalEllipsis from '../../images/icon-vertical-ellipsis.svg'
 import useStore from '@/zustand/store';
 
 export default function Header() {
-  const [boards] = useStore(state => [state.boards]);
+  const [actualBoards] = useStore(state => [state.actualBoards]);
   return (
     <header className={styles.header}>
-        <h1>{boards[0].name}</h1>
+        <h1>{actualBoards.name}</h1>
         <div className={styles.btns_header}>
           <button className={styles.btn}>
             + Add New Task
