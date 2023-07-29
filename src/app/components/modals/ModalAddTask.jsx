@@ -21,7 +21,7 @@ const customStyles = {
 };
 
 
-function ModalNewBoard({ titleModal, handleClick }) {
+function ModalNewBoard({ titleModal }) {
   // Hook que demonstra se a modal está aberta ou não
   const [modalNewBoard, updateModalNewBoard] = useStore((state) => 
   [state.modalNewBoard, state.updateModalNewBoard]
