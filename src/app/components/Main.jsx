@@ -9,8 +9,11 @@ import ModalNewBoard from './modals/ModalNewBoard';
 import Columns from './columns/Columns';
 
 export default function Main() {
-  const [isHidden, updateHidden, modalNewBoard, actualBoardId] = useStore((state) => [
-    state.isHidden, state.updateHidden, state.modalNewBoard, state.actualBoardId, 
+  const [isHidden, updateHidden, modalNewBoard, actualBoards] = useStore((state) => [
+    state.isHidden, 
+    state.updateHidden, 
+    state.modalNewBoard,
+    state.actualBoards,
   ]);
   const [boardLocal, setBoardLocal] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -28,11 +31,11 @@ export default function Main() {
 
   useEffect(() => {
     if (boardLocal.length !== 0) {
-      const board = boardLocal.find((board) => board.id === actualBoardId);
+      const board = boardLocal.find((board) => board.id === actualBoards.id);
       const columns = board.columns;
       setColumns(columns);
     }
-  }, [actualBoardId]);
+  }, [actualBoards]);
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
         {columns.length !== 0 ? (

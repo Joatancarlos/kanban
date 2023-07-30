@@ -7,17 +7,24 @@ import styles from '../page.module.css';
 import useStore from '@/zustand/store';
 
 
-const Boards = ({title}) => {
-  const [modalNewBoard, updateActualBoards, updateActualBoardId] = useStore((state) => 
-  [state.modalNewBoard, state.updateActualBoards , state.updateActualBoardId]
+const Boards = ({id, title}) => {
+  const [modalNewBoard, updateActualBoards, actualBoards] = useStore((state) => 
+  [state.modalNewBoard,
+    state.updateActualBoards,
+    state.actualBoards,
+  ]
   );
   const [isActive, setIsActive] = useState(false);
   const [boardLocal, setBoardLocal] = useState([]);
+
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
       try {
         setBoardLocal(boards)
+        if( id === 1) {
+          updateActualBoards(boards[0]);
+        } updateActualBoards(boards[id - 1]);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
@@ -26,17 +33,25 @@ const Boards = ({title}) => {
 
   const active = () => {
     setIsActive(!isActive);
-    const actualObj = boardLocal.find((obj) => obj.name === title);
+    const actualObj = boardLocal.find((obj) => obj.id === id);
     updateActualBoards(actualObj);
-    updateActualBoardId(actualObj.id);
   };
+
+  console.log(id);
+  console.log(actualBoards.id);
 
   return (
     <div
     onClick={ active }
-    className={isActive ? styles.boardsActive : styles.boardBtn}>
+    className={id === actualBoards.id ? styles.boardsActive : styles.boardBtn}>
       <h4>
-        <Image src={incoBoard} alt="icon board" width={16} height={16} className={styles.iconBoard} />
+        <Image 
+          src={incoBoard} 
+          alt="icon board" 
+          width={16} 
+          height={16} 
+          className={styles.iconBoard} 
+        />
         {title}
       </h4>
     </div>

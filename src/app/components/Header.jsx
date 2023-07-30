@@ -28,6 +28,7 @@ export default function Header() {
     };
   }, []);
   
+  // console.log(actualBoards);
 
   return (
     <header className={styles.header}>

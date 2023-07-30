@@ -32,6 +32,7 @@ const AsideBoards = () => {
             <Boards 
               key={board.name}
               title={board.name}
+              id={board.id}
             />
           ))}
         
@@ -40,7 +41,12 @@ const AsideBoards = () => {
         className={styles.btnCreateBoard}
         onClick={() => updateModalNewBoard(!modalNewBoard)}
       >
-        <Image src={incoBoard} alt="icon board" width={16} height={16} className={styles.iconBoard} />
+        <Image 
+          src={incoBoard} 
+          alt="icon board" 
+          width={16} height={16} 
+          className={styles.iconBoard} 
+        />
         + Create New Board
       </button>
     </div>
