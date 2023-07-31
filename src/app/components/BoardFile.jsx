@@ -24,12 +24,27 @@ const Boards = ({id, title}) => {
         setBoardLocal(boards)
         if( id === 1) {
           updateActualBoards(boards[0]);
+        }
+      } catch (error) {
+        console.error('Erro ao fazer parsing JSON:', error);
+      }
+    }
+  }, []);
+  
+  useEffect(() => {
+    const boards = getSavedBoards('board');
+    if (boards.length !== 0 && boards !== null) {
+      try {
+        setBoardLocal(boards)
+        if( id === 1) {
+          updateActualBoards(boards[0]);
         } updateActualBoards(boards[id - 1]);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
     }
   }, [modalNewBoard]);
+
 
   const active = () => {
     setIsActive(!isActive);
@@ -39,6 +54,8 @@ const Boards = ({id, title}) => {
 
   // console.log(id);
   // console.log(actualBoards.id);
+
+    console.log(actualBoards);
 
   return (
     <div

@@ -4,13 +4,13 @@ const useStore = create((set) => ({
   isHidden: false,
   modalNewBoard: false,
   modalDeleteBoard: false,
-  // actualBoardId: 1,
   actualBoards: {name: 'My board'},
+  isDelete: false,
   updateHidden: (hidden) => set(() => ({ isHidden: hidden })),
   updateModalNewBoard: (modalNewBoard) => set(() => ({ modalNewBoard: modalNewBoard })),
   updateActualBoards: (boards) => set(() => ({ actualBoards: boards })),
   updateModalDeleteBoard: (modalDeleteBoard) => set(() => ({ modalDeleteBoard: modalDeleteBoard })),
-  // updateActualBoardId: (id) => set(() => ({ actualBoardId: id })),
+  updateIsDelete: (isDelete) => set(() => ({ isDelete: isDelete })),
 }))
 
 export default useStore;

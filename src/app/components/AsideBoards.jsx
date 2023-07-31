@@ -8,8 +8,8 @@ import Image from 'next/image';
 import useStore from '@/zustand/store';
 
 const AsideBoards = () => {
-  const [modalNewBoard, updateModalNewBoard, boards] = useStore((state) => [
-    state.modalNewBoard, state.updateModalNewBoard, state.boards
+  const [modalNewBoard, isDelete ,updateModalNewBoard] = useStore((state) => [
+    state.modalNewBoard, state.isDelete ,state.updateModalNewBoard
   ]);
   const [boardLocal, setBoardLocal] = useState([]);
 
@@ -22,7 +22,7 @@ const AsideBoards = () => {
         console.error('Erro ao fazer parsing JSON:', error);
       }
     }
-  }, [modalNewBoard]);
+  }, [modalNewBoard, isDelete]);
 
   return (
   <>

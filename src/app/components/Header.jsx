@@ -9,8 +9,20 @@ import EditDeleteBox from './modals/EditDeleteBox';
 import ModalDelete from './modals/ModalDelete';
 
 export default function Header() {
-  const [actualBoards, modalNewBoard, modalDeleteBoard, updateModalDeleteBoard] = useStore(state => (
-    [state.actualBoards, state.modalNewBoard, state.modalDeleteBoard, state.updateModalDeleteBoard]
+  const [actualBoards,
+      modalNewBoard,
+      modalDeleteBoard,
+      idDelete, 
+      updateModalDeleteBoard,
+      updateIsDelete,
+    ] = useStore(state => (
+    [state.actualBoards,
+      state.modalNewBoard,
+      state.modalDeleteBoard,
+      state.isDelete,
+      state.updateModalDeleteBoard,
+      state.updateIsDelete,
+    ]
   ));
 
   const [isVisible, setIsVisible] = useState(false);
@@ -49,9 +61,10 @@ export default function Header() {
   }
   
   const deleteBoard = () => {
-    const newBoards = boardLocal.filter((board) => board.id !== actualBoards.id)
+    const newBoards = boardLocal.filter((board) => board.id !== actualBoards.id);
     localStorage.removeItem('board');
     localStorage.setItem('board', JSON.stringify(newBoards));
+    updateIsDelete(!idDelete);
     showDeleteBox();
   }
 

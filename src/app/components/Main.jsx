@@ -36,6 +36,7 @@ export default function Main() {
       setColumns(columns);
     }
   }, [actualBoards]);
+  
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
         {columns.length !== 0 ? (
