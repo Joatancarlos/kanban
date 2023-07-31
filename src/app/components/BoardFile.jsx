@@ -37,8 +37,8 @@ const Boards = ({id, title}) => {
     updateActualBoards(actualObj);
   };
 
-  console.log(id);
-  console.log(actualBoards.id);
+  // console.log(id);
+  // console.log(actualBoards.id);
 
   return (
     <div

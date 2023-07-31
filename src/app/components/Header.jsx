@@ -1,16 +1,21 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
+import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
 import styles from '../page.module.css'
 import Image from 'next/image'
 import verticalEllipsis from '../../images/icon-vertical-ellipsis.svg'
 import useStore from '@/zustand/store';
-import EditDeleteBox from './EditDeleteBox';
+import EditDeleteBox from './modals/EditDeleteBox';
+import ModalDelete from './modals/ModalDelete';
 
 export default function Header() {
-  const [actualBoards] = useStore(state => [state.actualBoards]);
-  // O objetivo da lógica das linhas 13 a 29 é fazer com que o componente EditDeleteBox apareça quando o usuário clicar no botão de três pontinhos e desapareça caso ele clique tanto fora do EditDeleteBox, quanto em algum do seus botões (editar board e deletar board).
-  // PS. Peguei o código do chat GPT 
+  const [actualBoards, modalNewBoard, modalDeleteBoard, updateModalDeleteBoard] = useStore(state => (
+    [state.actualBoards, state.modalNewBoard, state.modalDeleteBoard, state.updateModalDeleteBoard]
+  ));
+
   const [isVisible, setIsVisible] = useState(false);
+  const [boardLocal, setBoardLocal] = useState([]);
+
   const myElementRef = useRef(null);
   const handleClickOutside = (event) => {
     // console.log(myElementRef);
@@ -18,17 +23,38 @@ export default function Header() {
 
     if (myElementRef.current && !myElementRef.current.contains(event.target)) {
       setIsVisible(false);
-      console.log('entrei aqui');
     }
   };
+
+  useEffect(() => {
+    const boards = getSavedBoards('board');
+    if (boards.length !== 0 && boards !== null) {
+      try {
+        setBoardLocal(boards)
+      } catch (error) {
+        console.error('Erro ao fazer parsing JSON:', error);
+      }
+    }
+  }, [modalNewBoard]);
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  const showDeleteBox = () => {
+    updateModalDeleteBoard(!modalDeleteBoard);
+  }
   
-  // console.log(actualBoards);
+  const deleteBoard = () => {
+    const newBoards = boardLocal.filter((board) => board.id !== actualBoards.id)
+    localStorage.removeItem('board');
+    localStorage.setItem('board', JSON.stringify(newBoards));
+    showDeleteBox();
+  }
+
 
   return (
     <header className={styles.header}>
@@ -53,8 +79,17 @@ export default function Header() {
                 whosEdit="Board"
                 whosDelete="Board"
                 handleClickEdit={() => console.log('Edit Board')}
-                handleClickDelete={() => console.log('Delete Board')}
+                handleClickDelete={showDeleteBox}
               />  
+            )}
+
+            {modalDeleteBoard && (
+              <ModalDelete 
+                modalDeleteBoard={modalDeleteBoard} 
+                showDeleteBox={showDeleteBox}
+                deleteFunction={deleteBoard}
+                nameBoard={actualBoards.name}
+              />
             )}
           </div>
         </div>
