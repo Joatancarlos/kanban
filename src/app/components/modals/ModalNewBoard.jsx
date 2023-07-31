@@ -31,7 +31,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
   const [boardName, setBoardName] = useState('');
   const [columns, setColumns] = useState([objInitial]);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [id, setId] = useState(2);
+  const [id, setId] = useState(1);
   
 
   useEffect(() => {
@@ -42,8 +42,6 @@ function ModalNewBoard({ titleModal, handleClick }) {
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
-    } else {
-      setId(2);
     }
     // handleCheckInput();
   }, []);

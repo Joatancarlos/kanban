@@ -26,13 +26,15 @@ export default function Main() {
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
+    } else {
+      setBoardLocal([])
     }
   }, [modalNewBoard]);
 
   useEffect(() => {
     if (boardLocal.length !== 0) {
       const board = boardLocal.find((board) => board.id === actualBoards.id);
-      const columns = board.columns;
+      const columns = board ? board.columns : [];
       setColumns(columns);
     }
   }, [actualBoards]);

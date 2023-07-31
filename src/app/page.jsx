@@ -12,17 +12,17 @@ export default function Home() {
   const [isHidden] = useStore((state) => 
   [state.isHidden]
   );
-  const initialBoard = 
-    {
-      "id": 1,
-      "name": "My Board",
-      "columns": []
-    };
-  useEffect(() => {
-    const boardLocal = getSavedBoards('board');
-    const hasId1 = boardLocal.some((board) => board.id === 1);
-    if (!hasId1) saveBoards('board', initialBoard);
-  }, []);
+  // const initialBoard = 
+  //   {
+  //     "id": 1,
+  //     "name": "My Board",
+  //     "columns": []
+  //   };
+  // useEffect(() => {
+  //   const boardLocal = getSavedBoards('board');
+  //   const hasId1 = boardLocal.some((board) => board.id === 1);
+  //   if (!hasId1) saveBoards('board', initialBoard);
+  // }, []);
   return (
     <div className={styles.layout}>
       <Aside />

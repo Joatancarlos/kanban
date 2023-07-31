@@ -21,6 +21,8 @@ const AsideBoards = () => {
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
+    } else {
+      setBoardLocal([])
     }
   }, [modalNewBoard, isDelete]);
 

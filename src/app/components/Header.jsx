@@ -10,6 +10,7 @@ import ModalDelete from './modals/ModalDelete';
 
 export default function Header() {
   const [actualBoards,
+      updateActualBoards,
       modalNewBoard,
       modalDeleteBoard,
       idDelete, 
@@ -17,6 +18,7 @@ export default function Header() {
       updateIsDelete,
     ] = useStore(state => (
     [state.actualBoards,
+      state.updateActualBoards,
       state.modalNewBoard,
       state.modalDeleteBoard,
       state.isDelete,
@@ -43,9 +45,12 @@ export default function Header() {
     if (boards.length !== 0 && boards !== null) {
       try {
         setBoardLocal(boards)
+        updateActualBoards(boards[0]);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
+    } else {
+      setBoardLocal([])
     }
   }, [modalNewBoard]);
 
@@ -63,12 +68,17 @@ export default function Header() {
   const deleteBoard = () => {
     const newBoards = boardLocal.filter((board) => board.id !== actualBoards.id);
     localStorage.removeItem('board');
-    localStorage.setItem('board', JSON.stringify(newBoards));
+    newBoards.length !== 0 
+      ? localStorage.setItem('board', JSON.stringify(newBoards))
+      : updateActualBoards(newBoards);
+    ;
+    
     updateIsDelete(!idDelete);
     showDeleteBox();
+    // atualizar no estado global o actualBoards quando um board for deletado e criar o modal do edit 
   }
 
-
+  console.log(actualBoards);
   return (
     <header className={styles.header}>
         <h1>{actualBoards.name}</h1>

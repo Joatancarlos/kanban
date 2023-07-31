@@ -42,6 +42,8 @@ const Boards = ({id, title}) => {
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
+    } else {
+      setBoardLocal([])
     }
   }, [modalNewBoard]);
 
@@ -52,10 +54,11 @@ const Boards = ({id, title}) => {
     updateActualBoards(actualObj);
   };
 
-  // console.log(id);
-  // console.log(actualBoards.id);
+  console.log(id, 'id que tá chegando');
+  console.log(actualBoards.id, 'id que tá no store');
+  console.log(id === actualBoards.id)
 
-    console.log(actualBoards);
+    // console.log(id, 'id que tá chegando');
 
   return (
     <div

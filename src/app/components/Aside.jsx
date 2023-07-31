@@ -12,8 +12,8 @@ import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
 
 
 export default function Aside() {
-  const [isHidden, modalNewBoard] = useStore((state) => 
-  [state.isHidden, state.modalNewBoard]
+  const [isHidden, modalNewBoard, isDelete, actualBoards] = useStore((state) => 
+  [state.isHidden, state.modalNewBoard, state.isDelete, state.actualBoards]
   );
   const [boards, setBoards] = useState([])
   useEffect(() => {
@@ -24,8 +24,10 @@ export default function Aside() {
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
+    } else {
+      setBoards([])
     }
-  }, [modalNewBoard]);
+  }, [modalNewBoard, isDelete, actualBoards]);
 
   return (
     <aside className={isHidden ? styles.hiddenAsideContainer : styles.asideContainer}>
