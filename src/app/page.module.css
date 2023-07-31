@@ -311,3 +311,47 @@
   font-size: var(--font-size-s);
   margin: 5px 0;
 }
+
+.divElli {
+  position: relative;
+}
+
+/* modal editDeleteBox */
+.editDeleteBox {
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  z-index: 1;
+  min-width: 14vw;
+  background-color: var(--color-white-light);
+  border-radius: 8px;
+  box-shadow: 0px 0px 12px -8px var(--color-dark-primary);
+}
+
+.editDeleteBox button {
+  font-size: var(--font-size-m);
+  line-height: normal;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.editDeleteBox button:nth-child(1) {
+  color: var(--color-dark-secondary);
+  margin-bottom: 16px;
+}
+
+.editDeleteBox button:nth-child(1):hover {
+  color: var(--color-dark-primary-light);
+}
+
+.editDeleteBox button:nth-child(2) {
+  color: var(--color-red);
+}
+
+.editDeleteBox button:nth-child(2):hover {
+  color: var(--color-red-light);
+}

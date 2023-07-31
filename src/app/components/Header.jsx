@@ -94,7 +94,7 @@ export default function Header() {
           <button className={styles.btn}>
             + Add New Task
           </button>
-          <div>
+          <div className={styles.divElli}>
             <button
               onClick={(event) => {
                 setIsVisible(!isVisible)

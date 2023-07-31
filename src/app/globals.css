@@ -8,22 +8,22 @@
 
 :root {
   /* Light mode */
-  --color-light-primary: #635FC7;
+  --color-light-primary: #635fc7;
   --color-light-primary-light: #a8a4ff;
   --color-light-secondary: #000112;
   --color-light-secondary-light: #20212c;
 
   /* Dark mode */
-  --color-dark-primary: #2B2C37;
-  --color-dark-primary-light: #3E3F4E;
-  --color-dark-secondary: #828FA3;
-  --color-dark-secondary-light: #E4EBFA;
+  --color-dark-primary: rgb(43, 44, 55);
+  --color-dark-primary-light: rgb(62, 63, 78);
+  --color-dark-secondary: #828fa3;
+  --color-dark-secondary-light: rgb(228, 235, 250);
 
   /* Common */
   --color-white: #F4F7FD;
   --color-white-light: #ffffff;
   --color-red: #EA5555;
-  --color-red-light: #FF9898;
+  --color-red-light: hwb(0 60% 0%);
 
   --heigth-header-and-aside: 15.7vh;
   --width-layout: 75vw;
@@ -46,6 +46,7 @@
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  /* width: 1440px; */
 }
 
 button {
