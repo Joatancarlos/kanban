@@ -20,7 +20,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
     setColumns(actualBoard.columns);
   }, [actualBoard]);
 
-  console.log(columns, 'columns');
+  // console.log(columns, 'columns');
   const customStyles = {
     content: {
       minWidth: '38vw', 

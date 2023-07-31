@@ -131,7 +131,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
               <InputColumn 
                 key={index}
                 index={index}
-                inputValue={inputValue}
+                inputValue={inputValue.name}
                 handleInputChange={handleInputChange}
                 handleRemoveInput={handleRemoveInput}
               />

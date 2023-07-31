@@ -42,7 +42,7 @@ export default function Main() {
     }
   }, [actualBoards]);
 
-  console.log(actualBoards);
+  // console.log(actualBoards);
   
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>

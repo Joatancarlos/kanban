@@ -55,9 +55,9 @@ const Boards = ({id, title}) => {
     updateActualBoards(actualObj);
   };
 
-  console.log(id, 'id que tá chegando');
-  console.log(actualBoards.id, 'id que tá no store');
-  console.log(id === actualBoards.id)
+  // console.log(id, 'id que tá chegando');
+  // console.log(actualBoards.id, 'id que tá no store');
+  // console.log(id === actualBoards.id)
 
     // console.log(id, 'id que tá chegando');
 

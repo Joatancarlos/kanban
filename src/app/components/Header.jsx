@@ -86,7 +86,7 @@ export default function Header() {
     // atualizar no estado global o actualBoards quando um board for deletado e criar o modal do edit 
   }
 
-  console.log(actualBoards);
+  // console.log(actualBoards);
   return (
     <header className={styles.header}>
         <h1>{actualBoards.name}</h1>
