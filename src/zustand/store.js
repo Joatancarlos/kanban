@@ -4,6 +4,7 @@ const useStore = create((set) => ({
   isHidden: false,
   modalNewBoard: false,
   modalDeleteBoard: false,
+  modalEditBoard: false,
   actualBoards: [],
   isDelete: false,
   updateHidden: (hidden) => set(() => ({ isHidden: hidden })),
@@ -11,6 +12,7 @@ const useStore = create((set) => ({
   updateActualBoards: (boards) => set(() => ({ actualBoards: boards })),
   updateModalDeleteBoard: (modalDeleteBoard) => set(() => ({ modalDeleteBoard: modalDeleteBoard })),
   updateIsDelete: (isDelete) => set(() => ({ isDelete: isDelete })),
+  updateModalEditBoard: (modalEditBoard) => set(() => ({ modalEditBoard: modalEditBoard })),
 }))
 
 export default useStore;

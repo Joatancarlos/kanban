@@ -8,10 +8,11 @@ import useStore from '@/zustand/store';
 
 
 const Boards = ({id, title}) => {
-  const [modalNewBoard, updateActualBoards, actualBoards] = useStore((state) => 
+  const [modalNewBoard, updateActualBoards, actualBoards, isDelete] = useStore((state) => 
   [state.modalNewBoard,
     state.updateActualBoards,
     state.actualBoards,
+    state.isDelete,
   ]
   );
   const [isActive, setIsActive] = useState(false);
@@ -45,7 +46,7 @@ const Boards = ({id, title}) => {
     } else {
       setBoardLocal([])
     }
-  }, [modalNewBoard]);
+  }, [modalNewBoard, isDelete]);
 
 
   const active = () => {

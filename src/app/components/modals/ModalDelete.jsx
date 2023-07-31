@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal';
 
-export default function ModalDelete({modalDeleteBoard, showDeleteBox, deleteFunction, nameBoard}) {
+export default function ModalDelete({boardOrTask , modalDeleteBoard, showDeleteBox, deleteFunction, children}) {
   const customStyles = {
     content: {
       width: '25vw', 
@@ -23,8 +23,8 @@ export default function ModalDelete({modalDeleteBoard, showDeleteBox, deleteFunc
         ariaHideApp={false}
       >
         <div>
-          <h3>Delete this board?</h3>
-          <p>Are you sure you want to delete the '{nameBoard}' board? This action will remove all columns and tasks and cannot be reversed.</p>
+          <h3>Delete this {boardOrTask}?</h3>
+          <p>{children}</p>
           <button type="button" onClick={deleteFunction}>
             Delete
           </button>

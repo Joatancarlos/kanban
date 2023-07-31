@@ -1,53 +1,39 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect, useState } from 'react';
-// Importa a modal do react-modal
 import Modal from 'react-modal';
-import Image from 'next/image';
-import closeIcon from '../../../images/icon-cross.svg'
 import useStore from '@/zustand/store';
 import styles from '../../page.module.css';
 import InputColumn from './InputColumn';
 import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
 
-const customStyles = {
-  content: {
-    minWidth: '38vw', 
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-
-function ModalNewBoard({ titleModal, handleClick }) {
-  const [modalNewBoard, updateModalNewBoard] = useStore((state) => 
-  [state.modalNewBoard, state.updateModalNewBoard]
+export default function ModalEditBoard({actualBoard, boardLocal}) {
+  const [modalEditBoard, updateModalEditBoard, isDelete, updateIsDelete] = useStore((state) =>
+    [state.modalEditBoard, state.updateModalEditBoard, state.isDelete, state.updateIsDelete]
   );
   const objInitial = {name: ''};
   const [columns, setColumns] = useState([objInitial]);
-  const [boardName, setBoardName] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
-  const [id, setId] = useState(1);
+  const [boardName, setBoardName] = useState('');
   
-
   useEffect(() => {
-    const boards = getSavedBoards('board');
-    if (boards.length !== 0 && boards !== null) {
-      try {
-        setId(boards.length + 1);
-      } catch (error) {
-        console.error('Erro ao fazer parsing JSON:', error);
-      }
-    }
-    // handleCheckInput();
-  }, []);
+    setBoardName(actualBoard.name);
+    setColumns(actualBoard.columns);
+  }, [actualBoard]);
 
+  console.log(columns, 'columns');
+  const customStyles = {
+    content: {
+      minWidth: '38vw', 
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
   function fecharModal() {
-    updateModalNewBoard(false);
+    updateModalEditBoard(false);
   }
 
   const handleAddInput = (e) => {
@@ -79,17 +65,21 @@ function ModalNewBoard({ titleModal, handleClick }) {
     handleCheckInput(value);
   };
 
-
-
   const saveBoard = () => {
     if (boardName.length > 1) {
       setIsDisabled(false);
       const columnsNotEmpty = columns.filter((col) => col.name !== "");
-      saveBoards("board", {
-        id,
+      const editBoard = {
+        id: actualBoard.id,
         name: boardName, 
         columns: columnsNotEmpty,
-      });
+      }
+      const index = boardLocal.findIndex((board) => board.id === actualBoard.id);
+      boardLocal[index] = editBoard;
+      localStorage.removeItem('board');
+      localStorage.setItem('board', JSON.stringify(boardLocal));
+      // Alterar o estado do isDelete aqui serve somente para atualizar o componente BoardFile
+      updateIsDelete(!isDelete);
       fecharModal();
     } else {
       setIsDisabled(true);
@@ -100,7 +90,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
   return (
     <div>
       <Modal
-        isOpen={modalNewBoard}
+        isOpen={modalEditBoard}
         onRequestClose={fecharModal}
         contentLabel="Modal de exemplo"
         shouldCloseOnOverlayClick={true}
@@ -109,29 +99,29 @@ function ModalNewBoard({ titleModal, handleClick }) {
       >
         <div className={styles.containerModal}>
           <div>
-            <h2>{titleModal}</h2>
+            <h2>Edit Board</h2>
           </div>
           <form className={styles.formAdd}>
-            <label>Name</label>
+            <label>Board Name</label>
             <div>
               <input 
                 className={styles.input} 
                 type="text" 
-                placeholder="e.g. Web Design" 
+                placeholder="e.g. Web Design"
                 value={boardName}
                 onChange={(e) => handleChange(e, setBoardName)}
               />
             </div>
             { isDisabled && <p className={styles.error}>Please enter a name</p>}
             {columns.length !== 0 && (
-              <label>Columns</label>
+              <label>Board Columns</label>
             )}
           
-            {columns && columns.map((inputValue, index) => (
+            {columns && columns.map((_inputValue, index) => (
               <InputColumn 
                 key={index}
                 index={index}
-                inputValue={inputValue}
+                inputValue={columns[index].name}
                 handleInputChange={handleInputChange}
                 handleRemoveInput={handleRemoveInput}
               />
@@ -150,13 +140,11 @@ function ModalNewBoard({ titleModal, handleClick }) {
               onClick={saveBoard}
               className={styles.btn}
             >
-              create new board
+              save changes
             </button>
           </form>
         </div>
       </Modal>
     </div>
-  );
+  )
 }
-
-export default ModalNewBoard;

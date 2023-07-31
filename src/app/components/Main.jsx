@@ -7,13 +7,16 @@ import styles from '../page.module.css'
 import hideSidebarEyeOpen from '../../images/icon-show-sidebar.svg';
 import ModalNewBoard from './modals/ModalNewBoard';
 import Columns from './columns/Columns';
+import ModalEditBoard from './modals/ModalEditBoard';
 
 export default function Main() {
-  const [isHidden, updateHidden, modalNewBoard, actualBoards] = useStore((state) => [
+  const [isHidden, updateHidden, modalNewBoard, actualBoards, 
+    modalEditBoard] = useStore((state) => [
     state.isHidden, 
     state.updateHidden, 
     state.modalNewBoard,
     state.actualBoards,
+    state.modalEditBoard,
   ]);
   const [boardLocal, setBoardLocal] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -38,6 +41,8 @@ export default function Main() {
       setColumns(columns);
     }
   }, [actualBoards]);
+
+  console.log(actualBoards);
   
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
@@ -66,6 +71,12 @@ export default function Main() {
         {modalNewBoard && (
           <ModalNewBoard 
             titleModal="Add New Board"
+          />
+        )}
+        {modalEditBoard && (
+          <ModalEditBoard  
+            actualBoard={actualBoards}
+            boardLocal={boardLocal}
           />
         )}
     </main>

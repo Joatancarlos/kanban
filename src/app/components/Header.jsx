@@ -13,9 +13,11 @@ export default function Header() {
       updateActualBoards,
       modalNewBoard,
       modalDeleteBoard,
-      idDelete, 
+      isDelete,
       updateModalDeleteBoard,
       updateIsDelete,
+      modalEditBoard,
+      updateModalEditBoard,
     ] = useStore(state => (
     [state.actualBoards,
       state.updateActualBoards,
@@ -24,6 +26,8 @@ export default function Header() {
       state.isDelete,
       state.updateModalDeleteBoard,
       state.updateIsDelete,
+      state.modalEditBoard,
+      state.updateModalEditBoard,
     ]
   ));
 
@@ -52,7 +56,7 @@ export default function Header() {
     } else {
       setBoardLocal([])
     }
-  }, [modalNewBoard]);
+  }, [modalNewBoard, isDelete]);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -61,6 +65,10 @@ export default function Header() {
     };
   }, []);
 
+  const showEditBox = () => {
+    updateModalEditBoard(!modalEditBoard);
+  }
+  
   const showDeleteBox = () => {
     updateModalDeleteBoard(!modalDeleteBoard);
   }
@@ -73,7 +81,7 @@ export default function Header() {
       : updateActualBoards(newBoards);
     ;
     
-    updateIsDelete(!idDelete);
+    updateIsDelete(!isDelete);
     showDeleteBox();
     // atualizar no estado global o actualBoards quando um board for deletado e criar o modal do edit 
   }
@@ -101,19 +109,22 @@ export default function Header() {
               <EditDeleteBox
                 whosEdit="Board"
                 whosDelete="Board"
-                handleClickEdit={() => console.log('Edit Board')}
+                handleClickEdit={showEditBox}
                 handleClickDelete={showDeleteBox}
               />  
             )}
 
             {modalDeleteBoard && (
               <ModalDelete 
+                boardOrTask={'board'}
                 modalDeleteBoard={modalDeleteBoard} 
                 showDeleteBox={showDeleteBox}
                 deleteFunction={deleteBoard}
-                nameBoard={actualBoards.name}
-              />
+              >
+                {`Are you sure you want to delete the '${actualBoards.name}' board? This action will remove all columns and tasks and cannot be reversed.`}
+              </ModalDelete>
             )}
+
           </div>
         </div>
     </header>
