@@ -388,19 +388,19 @@
   width: 45%;
 }
 
+.btnSecondaryLight {
+  background-color: rgba(99, 95, 199, 0.10);
+  color: var(--color-light-primary);
+}
+
+.btnSecondaryLight:hover {
+  background-color: rgba(98, 95, 199, 0.432);
+}
+
 .buttonsDelete button:nth-child(1) {
   background-color: var(--color-red);
 }
 
 .buttonsDelete button:nth-child(1):hover {
   background-color: var(--color-red-light);
-}
-
-.buttonsDelete button:nth-child(2) {
-  background-color: rgba(99, 95, 199, 0.10);
-  color: var(--color-light-primary);
-}
-
-.buttonsDelete button:nth-child(2):hover {
-  background-color: rgba(98, 95, 199, 0.432);
 }
