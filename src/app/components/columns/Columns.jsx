@@ -1,18 +1,20 @@
+import styles from '../../page.module.css'
+
 const Columns = ({columns}) => {
   return (
     <>
 
     {columns && columns.map(({name, tasks}) => (
-      <div key={name}>
+      <div className={styles.divColumns} key={name}>
 
-        <h3>{`${name} (${tasks ? tasks.length : "0"})`}</h3>
+        <h3 className={styles.titleColumn}>{`${name} (${tasks ? tasks.length : "0"})`}</h3>
 
         {tasks && tasks.map(({id, title, description, status, subtasks}) => (
           <>
             <div key={id}>
-              <h2>{title}</h2>
-              <h2>{description}</h2>
-              <h2>{status}</h2>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <span>{status}</span>
             </div>
             <div>
               {subtasks && 
@@ -28,7 +30,9 @@ const Columns = ({columns}) => {
       </div>
 
     ))}
-
+    <button className={styles.newColumn} type="button">
+      + new column
+    </button>
     </>
   )
 }

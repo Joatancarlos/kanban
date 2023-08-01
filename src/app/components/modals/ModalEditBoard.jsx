@@ -110,6 +110,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
                 placeholder="e.g. Web Design"
                 value={boardName}
                 onChange={(e) => handleChange(e, setBoardName)}
+                autoFocus
               />
             </div>
             { isDisabled && <p className={styles.error}>Please enter a name</p>}

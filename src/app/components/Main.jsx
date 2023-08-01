@@ -10,14 +10,19 @@ import Columns from './columns/Columns';
 import ModalEditBoard from './modals/ModalEditBoard';
 
 export default function Main() {
-  const [isHidden, updateHidden, modalNewBoard, actualBoards, 
-    modalEditBoard] = useStore((state) => [
+  const [isHidden,
+      updateHidden, 
+      modalNewBoard, 
+      actualBoards, 
+      modalEditBoard,
+  ] = useStore((state) => [
     state.isHidden, 
     state.updateHidden, 
     state.modalNewBoard,
     state.actualBoards,
     state.modalEditBoard,
   ]);
+
   const [boardLocal, setBoardLocal] = useState([]);
   const [columns, setColumns] = useState([]);
 
@@ -41,44 +46,42 @@ export default function Main() {
       setColumns(columns);
     }
   }, [actualBoards]);
-
-  // console.log(actualBoards);
   
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
         {columns.length !== 0 ? (
           <Columns columns={columns} />
         ) : (
-          <div className={styles.emptyBoard}>
-          <p>This board is empty. Create a new column to get started.</p>
-          <button className={styles.btn}>
-            + add new column
-          </button>
-        </div>
-        )} 
-        
-
-        <div className={styles.sidebarContentHide}>
-
-          <button
-            type='button'
-            onClick={() => updateHidden(!isHidden)}
-            className={ isHidden ?  styles.showBtn : styles.hideBtn}
-          >
-            <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={15} priority />
-          </button>
-        </div>
-        {modalNewBoard && (
-          <ModalNewBoard 
-            titleModal="Add New Board"
-          />
+          <div className={`${styles.main} ${styles.mainEmptyBoard}`}>
+            <div className={styles.emptyBoard}>
+              <p>This board is empty. Create a new column to get started.</p>
+              <button className={` ${styles.btn} ${styles.btnPrimaryLight}`}>
+                + add new column
+              </button>
+            </div> 
+          </div>
         )}
-        {modalEditBoard && (
-          <ModalEditBoard  
-            actualBoard={actualBoards}
-            boardLocal={boardLocal}
-          />
-        )}
+      
+
+      <div className={styles.sidebarContentHide}>
+
+        <button
+          type='button'
+          onClick={() => updateHidden(!isHidden)}
+          className={ isHidden ?  styles.showBtn : styles.hideBtn}
+        >
+          <Image src={hideSidebarEyeOpen} alt="Hide Sidebar" width={20} height={15} priority />
+        </button>
+      </div>
+      {modalNewBoard && (
+        <ModalNewBoard 
+          titleModal="Add New Board"
+        />
+      )}
+        <ModalEditBoard  
+          actualBoard={actualBoards}
+          boardLocal={boardLocal}
+        />
     </main>
   )
 }

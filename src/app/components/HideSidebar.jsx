@@ -15,10 +15,10 @@ const HideSidebar = () => {
       <button
         type='button'
         onClick={() => updateHidden(!isHidden)}
-        className={styles.buttonHideSidebar}
+        className={`${styles.buttonHideSidebar} ${styles.boardBtn}`}
       >
         <Image src={hideSidebarEyeClose} alt="Hide Sidebar" width={20} height={15} priority />
-        <p>Hide Sidebar</p>
+        Hide Sidebar
       </button>
 
       </div>
