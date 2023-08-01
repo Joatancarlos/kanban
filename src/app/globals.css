@@ -9,7 +9,7 @@
 :root {
   /* Light mode */
   --color-light-primary: #635fc7;
-  --color-light-primary-light: #a8a4ff;
+  --color-light-primary-light: rgb(168, 164, 255);
   --color-light-secondary: #000112;
   --color-light-secondary-light: #20212c;
 
