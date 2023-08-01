@@ -114,7 +114,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
               />
             </div>
             { isDisabled && <p className={styles.error}>Please enter a name</p>}
-            {columns.length !== 0 && (
+            {actualBoard.length !== 0 && (
               <label>Board Columns</label>
             )}
           
