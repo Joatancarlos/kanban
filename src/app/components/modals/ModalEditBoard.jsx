@@ -128,7 +128,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
             ))}
             
             <button 
-              className={styles.btn} 
+              className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
               onClick={handleAddInput}
               type='button'
             >
@@ -138,7 +138,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
             <button
               type="button"
               onClick={saveBoard}
-              className={styles.btn}
+              className={` ${styles.btn} ${styles.btnPrimaryLight}`}
             >
               save changes
             </button>

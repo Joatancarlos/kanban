@@ -29,14 +29,30 @@
 }
 
 .btn {
-  background-color: var(--color-light-primary);
-  color: var(--color-white-light);
   text-transform: capitalize;
   border: none;
   border-radius: 30px;
   padding: 12px 25px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
+
+.btnPrimaryLight {
+  background-color: var(--color-light-primary);
+  color: var(--color-white-light);
+}
+
+.btnPrimaryLight:hover {
+  background-color: var(--color-light-primary-light);
+}
+
+.btnSecondaryLight {
+  background-color: rgba(99, 95, 199, 0.10);
+  color: var(--color-light-primary);
+}
+
+.btnSecondaryLight:hover {
+  background-color: rgba(98, 95, 199, 0.432);
 }
 
 .btnElli {
@@ -388,17 +404,9 @@
   width: 45%;
 }
 
-.btnSecondaryLight {
-  background-color: rgba(99, 95, 199, 0.10);
-  color: var(--color-light-primary);
-}
-
-.btnSecondaryLight:hover {
-  background-color: rgba(98, 95, 199, 0.432);
-}
-
 .buttonsDelete button:nth-child(1) {
   background-color: var(--color-red);
+  color: var(--color-white);
 }
 
 .buttonsDelete button:nth-child(1):hover {

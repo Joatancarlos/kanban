@@ -91,7 +91,7 @@ export default function Header() {
     <header className={styles.header}>
         <h1>{actualBoards.name}</h1>
         <div className={styles.btns_header}>
-          <button className={styles.btn}>
+          <button className={` ${styles.btn} ${styles.btnPrimaryLight}`}>
             + Add New Task
           </button>
           <div className={styles.divElli}>

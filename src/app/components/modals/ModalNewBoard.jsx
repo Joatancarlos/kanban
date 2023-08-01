@@ -138,7 +138,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
             ))}
             
             <button 
-              className={styles.btn} 
+              className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
               onClick={handleAddInput}
               type='button'
             >
@@ -148,7 +148,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
             <button
               type="button"
               onClick={saveBoard}
-              className={styles.btn}
+              className={` ${styles.btn} ${styles.btnPrimaryLight}`}
             >
               create new board
             </button>

@@ -30,7 +30,7 @@ export default function ModalDelete({boardOrTask , modalDeleteBoard, showDeleteB
             <button className={styles.btn} type="button" onClick={deleteFunction}>
               Delete
             </button>
-            <button className={styles.btnSecondaryLight} type="button" onClick={() => showDeleteBox()}>
+            <button className={` ${styles.btn} ${styles.btnSecondaryLight}`} type="button" onClick={() => showDeleteBox()}>
               Cancel
             </button>
           </div>
