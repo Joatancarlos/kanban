@@ -76,11 +76,9 @@ export default function Header() {
     if (boards.length !== 0 && boards !== null) {
       try {
         if(actualBoards.columns.length === 0) {
-          console.log('Não tem colunas');
           setIsDisabled(true);
           return;
         } setIsDisabled(false);
-          console.log('Tem colunas');
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
@@ -111,11 +109,9 @@ export default function Header() {
 
   const addTask = () => {
     if (actualBoards.columns.length === 0) {
-      console.log('Não tem colunas');
       setIsDisabled(true);
       return;
     }
-    console.log('Tem colunas');
     setIsDisabled(false);
     updateIsNewTask(!isNewTask);
   };
@@ -163,7 +159,6 @@ export default function Header() {
               </ModalDelete>
             )}
 
-            {console.log(isNewTask)}
             {isNewTask && (
               <ModalAddTask 
                 titleModal="Add New Task"

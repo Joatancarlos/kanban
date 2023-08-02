@@ -1,11 +1,13 @@
 import styles from '../../page.module.css'
 
 const Columns = ({columns}) => {
+  // console.log(columns, '---> columns');
   return (
     <>
 
     {columns && columns.map(({name, tasks}) => (
       <div className={styles.divColumns} key={name}>
+        {/* {console.log(name, '---> name', tasks, '---> tasks')} */}
 
         <h3 className={styles.titleColumn}>{`${name} (${tasks ? tasks.length : "0"})`}</h3>
 

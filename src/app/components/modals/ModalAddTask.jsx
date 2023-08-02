@@ -35,13 +35,6 @@ function ModalAddTask({ titleModal, boardLocal }) {
           state.updateActualBoards]
         );
 
-  const initialTask = {
-    title : '', 
-    description: '', 
-    subtasks: [],
-    status: '', 
-  };
-  
   const [taskTitle, setTaskTitle] = useState('');
   const [tasksDescription, setTasksdescription] = useState('');
   const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].name);
@@ -53,7 +46,6 @@ function ModalAddTask({ titleModal, boardLocal }) {
   
   const handleCheckInput = (value) => {
     if (value.length > 1 && value !== undefined) {
-      setIsDisabled(false);
     } 
   };
   
@@ -77,17 +69,25 @@ function ModalAddTask({ titleModal, boardLocal }) {
   };
 
     const saveTask = () => {
+      actualBoards.columns.map((column) => {
+        if (column.tasks === undefined) {
+          column.tasks = [];
+        }
+      })
+
+      console.log(actualBoards, 'actualBoards');
+
       const colunmByName = actualBoards.columns.filter((column) => column.name === tasksStatus)
 
-      const task = {
+      const tasks = {
         id: Math.floor(Math.random() * 100000000),
         title: taskTitle,
         description: tasksDescription,
         subtasks: subTasks,
         status: colunmByName[0].name,
       }
-    
-      const columns2 = {...colunmByName[0], task}
+
+      const columns2 = {...colunmByName[0], tasks: [...colunmByName[0].tasks, tasks]}
     
       const actualColumns = actualBoards.columns.filter((column) => column.name !== tasksStatus)
     
