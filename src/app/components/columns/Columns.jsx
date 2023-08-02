@@ -12,7 +12,7 @@ const Columns = ({columns}) => {
 
         <h3 className={styles.titleColumn}>{`${name} (${tasks ? tasks.length : "0"})`}</h3>
 
-        {tasks && tasks.map(({id, title, description, status, subtasks}) => (
+        {tasks && tasks.map(({id, title, description, subtasks}) => (
           <>
             <div key={id}>
               <h3>{title}</h3>

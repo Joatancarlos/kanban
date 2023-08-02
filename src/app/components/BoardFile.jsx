@@ -37,9 +37,10 @@ const Boards = ({id, title}) => {
     if (boards.length !== 0 && boards !== null) {
       try {
         setBoardLocal(boards)
-        if( id === 1) {
-          updateActualBoards(boards[0]);
-        } updateActualBoards(boards[id - 1]);
+        if( id === actualBoards.id) {
+          setIsActive(true);
+        } setIsActive(false);
+
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }

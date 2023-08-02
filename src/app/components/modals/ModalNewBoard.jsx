@@ -31,14 +31,14 @@ function ModalNewBoard({ titleModal, handleClick }) {
   const [columns, setColumns] = useState([objInitial]);
   const [boardName, setBoardName] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(Math.floor(Math.random() * 100000000));
   
 
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
       try {
-        setId(boards.length + 1);
+        setId(Math.floor(Math.random() * 100000000));
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
