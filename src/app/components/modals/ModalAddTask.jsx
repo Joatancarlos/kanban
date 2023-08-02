@@ -75,8 +75,6 @@ function ModalAddTask({ titleModal, boardLocal }) {
         }
       })
 
-      console.log(actualBoards, 'actualBoards');
-
       const colunmByName = actualBoards.columns.filter((column) => column.name === tasksStatus)
 
       const tasks = {
@@ -100,6 +98,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
         boardLocal[index] = actualBoardUpdate;
         localStorage.removeItem('board');
         localStorage.setItem('board', JSON.stringify(boardLocal));
+        updateActualBoards(actualBoardUpdate);
         updateIsNewTask(false);
   };
 

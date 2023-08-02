@@ -15,12 +15,14 @@ export default function Main() {
       modalNewBoard, 
       actualBoards, 
       modalEditBoard,
+      isNewTask,
   ] = useStore((state) => [
     state.isHidden, 
     state.updateHidden, 
     state.modalNewBoard,
     state.actualBoards,
     state.modalEditBoard,
+    state.isNewTask,
   ]);
 
   const [boardLocal, setBoardLocal] = useState([]);
@@ -30,25 +32,39 @@ export default function Main() {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
       try {
+        console.log(boards, 'boards');
+        // valores atualizados
         setBoardLocal(boards)
+        const board = boards.find((board) => board.id === actualBoards.id);
+        const columns = board ? board.columns : [];
+        setColumns(columns);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
     } else {
       setBoardLocal([])
     }
-  }, [modalNewBoard]);
+  }, [modalNewBoard, actualBoards]);
 
-  useEffect(() => {
-    if (boardLocal.length !== 0) {
-      const board = boardLocal.find((board) => board.id === actualBoards.id);
-      const columns = board ? board.columns : [];
-      setColumns(columns);
-    }
-  }, [actualBoards]);
+  console.log(isNewTask, 'isNewTask');
+
+  // useEffect(() => {
+  //   if (boardLocal.length !== 0) {
+  //     const board = boardLocal.find((board) => board.id === actualBoards.id);
+  //     console.log(board, 'board');
+  //     const columns = board ? board.columns : [];
+  //     // valores nao atualizados
+  //     console.log(columns, 'columns');
+  //     setColumns(columns);
+  //   }
+  // }, [actualBoards, isNewTask]);
   
+  // console.log(actualBoards, 'actualBoards');
+  // console.log(boardLocal[0].columns, 'boardLocal linha 58');
+  // até aqui o boardLocal está vindo com as colunas atualizadas
   return (
     <main className={isHidden ? styles.hiddenMain : styles.main}>
+      {/* {console.log(columns, 'columns')} */}
         {columns.length !== 0 ? (
           <Columns columns={columns} />
         ) : (

@@ -1,3 +1,4 @@
+"use client";
 import styles from '../../page.module.css'
 
 const Columns = ({columns}) => {
@@ -16,7 +17,6 @@ const Columns = ({columns}) => {
             <div key={id}>
               <h3>{title}</h3>
               <p>{description}</p>
-              <span>{status}</span>
             </div>
             <div>
               {subtasks && 
