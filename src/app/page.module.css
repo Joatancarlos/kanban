@@ -499,3 +499,17 @@
   color: var(--color-dark-secondary);
   margin-top: 5px;
 }
+
+.select {
+  background-image: url('../images/icon-chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 2% center ;
+  transition: all 0.3s ease-in-out;
+}
+
+.select:focus {
+  background-image: url('../images/icon-chevron-up.svg');
+  background-repeat: no-repeat;
+  background-position: right 2% center ;
+  transition: all 0.3s ease-in-out;
+}

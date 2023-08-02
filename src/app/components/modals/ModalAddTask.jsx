@@ -166,7 +166,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 id=""
                 value={tasksStatus}
                 onChange={(e) => handleChange(e, setTasksStatus)}  
-                className={styles.input}
+                className={`${styles.input} ${styles.select}`}
               >
                 {actualBoards.columns.map((column, index) => (
                   <option

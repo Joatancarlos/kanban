@@ -76,11 +76,12 @@ h4 {
   font-weight: 700;
 }
 
-/* select {
+select {
   -webkit-appearance: none; 
   -moz-appearance: none; 
-  appearance: none;
-} */
+  appearance: none;  
+  background-color: transparent;
+}
 
 label {
   font-size: var(--font-size-s);
