@@ -99,7 +99,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
       >
         <div className={styles.containerModal}>
           <div>
-            <h2>Edit Board</h2>
+            <h3>Edit Board</h3>
           </div>
           <form className={styles.formAdd}>
             <label>Board Name</label>

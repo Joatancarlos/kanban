@@ -53,8 +53,8 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: var(--font-size-l);
-  line-height: var(--line-height-l);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
   font-weight: 700;
 }
 
@@ -79,5 +79,12 @@ h4 {
 select {
   -webkit-appearance: none; 
   -moz-appearance: none; 
-  appearance: none;
+  appearance: none;  
+  background-color: transparent;
+}
+
+label {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  font-weight: 700;
 }

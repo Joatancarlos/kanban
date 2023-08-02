@@ -46,7 +46,10 @@ export default function Main() {
     }
   }, [modalNewBoard, actualBoards]);
 
-  console.log(isNewTask, 'isNewTask');
+  const newBoardOrColumn = () => {
+  }
+     
+        
 
   // useEffect(() => {
   //   if (boardLocal.length !== 0) {
