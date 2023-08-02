@@ -57,7 +57,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
   };
   
   const handleRemoveInput = (index) => {
-    const newInputs = [...columns];
+    const newInputs = [...subTasks];
     const newInput = newInputs.filter((_col, i) => i !== index)
     // newInputs.splice(index, 1);
     setSubTasks(newInput);
@@ -113,10 +113,10 @@ function ModalAddTask({ titleModal, boardLocal }) {
       >
         <div className={styles.containerModal}>
           <div>
-            <h2>{titleModal}</h2>
+            <h3>{titleModal}</h3>
           </div>
           <form className={styles.formAdd}>
-            <label>Title</label>
+            <label className={styles.label}>Title</label>
             <div>
               <input 
                 className={styles.input}
@@ -126,7 +126,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 onChange={(e) => handleChange(e, setTaskTitle)}
               />
             </div>
-            <label htmlFor="desc">Description</label>
+            <label className={styles.label} htmlFor="desc">Description</label>
             <div>
               <textarea 
                 name="description"
@@ -138,30 +138,28 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 onChange={(e) => handleChange(e, setTasksdescription)}  
               />
             </div>
-              <label>Subtaks</label>
-            <div>
+              <label className={styles.label}>Subtaks</label>
 
-            {subTasks && subTasks.map((inputValue, index) => (
-              <InputColumn 
-                key={index}
-                index={index}
-                inputValue={inputValue.name}
-                handleInputChange={handleInputChange}
-                handleRemoveInput={handleRemoveInput}
-              />
-            ))}
-            
-            <button 
-              className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
-              onClick={handleAddInput}
-              type='button'
-            >
-              + add new subtask
-            </button>
+              {subTasks && subTasks.map((inputValue, index) => (
+                <InputColumn 
+                  key={index}
+                  index={index}
+                  inputValue={inputValue.name}
+                  handleInputChange={handleInputChange}
+                  handleRemoveInput={handleRemoveInput}
+                />
+              ))}
+              
+              <button 
+                className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
+                onClick={handleAddInput}
+                type='button'
+              >
+                + add new subtask
+              </button>
 
-            </div>
 
-            <label htmlFor="">Status</label>
+            <label className={styles.label} htmlFor="">Status</label>
             <div>
               <select 
                 name="" 
@@ -178,7 +176,6 @@ function ModalAddTask({ titleModal, boardLocal }) {
                     {column.name}
                   </option>
                 ))}
-                
               </select>
             </div>
             <button

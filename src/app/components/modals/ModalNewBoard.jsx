@@ -109,7 +109,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
       >
         <div className={styles.containerModal}>
           <div>
-            <h2>{titleModal}</h2>
+            <h3>{titleModal}</h3>
           </div>
           <form className={styles.formAdd}>
             <label>Name</label>
