@@ -16,6 +16,8 @@ export default function Main() {
       actualBoards, 
       modalEditBoard,
       isNewTask,
+      updateModalEditBoard,
+      updateModalNewBoard
   ] = useStore((state) => [
     state.isHidden, 
     state.updateHidden, 
@@ -23,6 +25,8 @@ export default function Main() {
     state.actualBoards,
     state.modalEditBoard,
     state.isNewTask,
+    state.updateModalEditBoard,
+    state.updateModalNewBoard
   ]);
 
   const [boardLocal, setBoardLocal] = useState([]);
@@ -47,9 +51,9 @@ export default function Main() {
   }, [modalNewBoard, actualBoards]);
 
   const newBoardOrColumn = () => {
+    console.log(boardLocal.length, 'boardLocal linha 54');
+    boardLocal.length ? updateModalEditBoard(true) : updateModalNewBoard(true)
   }
-     
-        
 
   // useEffect(() => {
   //   if (boardLocal.length !== 0) {
@@ -74,7 +78,11 @@ export default function Main() {
           <div className={`${styles.main} ${styles.mainEmptyBoard}`}>
             <div className={styles.emptyBoard}>
               <p>This board is empty. Create a new column to get started.</p>
-              <button className={` ${styles.btn} ${styles.btnPrimaryLight}`}>
+              <button
+                type='button'
+                onClick={newBoardOrColumn}
+                className={` ${styles.btn} ${styles.btnPrimaryLight}`}
+              >
                 + add new column
               </button>
             </div> 

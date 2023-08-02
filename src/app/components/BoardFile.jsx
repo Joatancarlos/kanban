@@ -23,7 +23,7 @@ const Boards = ({id, title}) => {
     if (boards.length !== 0 && boards !== null) {
       try {
         setBoardLocal(boards)
-        if( id === 1) {
+        if( id === actualBoards.id) {
           updateActualBoards(boards[0]);
         }
       } catch (error) {

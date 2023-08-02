@@ -6,8 +6,7 @@ import Modal from 'react-modal';
 import useStore from '@/zustand/store';
 import InputColumn from './InputColumn';
 import styles from '../../page.module.css';
-import chevron from '@/images/icon-chevron-down.svg';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const customStyles = {
   content: {
@@ -20,7 +19,6 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
   },
 };
-
 
 function ModalAddTask({ titleModal, boardLocal }) {
   // Hook que demonstra se a modal está aberta ou não
@@ -58,8 +56,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
   
   const handleRemoveInput = (index) => {
     const newInputs = [...subTasks];
-    const newInput = newInputs.filter((_col, i) => i !== index)
-    // newInputs.splice(index, 1);
+    const newInput = newInputs.filter((_col, i) => i !== index);
     setSubTasks(newInput);
   };
   
@@ -68,38 +65,51 @@ function ModalAddTask({ titleModal, boardLocal }) {
     handleCheckInput(value);
   };
 
-    const saveTask = () => {
-      actualBoards.columns.map((column) => {
-        if (column.tasks === undefined) {
-          column.tasks = [];
-        }
-      })
-
-      const colunmByName = actualBoards.columns.filter((column) => column.name === tasksStatus)
-
-      const tasks = {
-        id: Math.floor(Math.random() * 100000000),
-        title: taskTitle,
-        description: tasksDescription,
-        subtasks: subTasks,
-        status: colunmByName[0].name,
+  const saveTask = () => {
+    actualBoards.columns.map((column) => {
+      if (column.tasks === undefined) {
+        column.tasks = [];
       }
+    });
 
-      const columns2 = {...colunmByName[0], tasks: [...colunmByName[0].tasks, tasks]}
-    
-      const actualColumns = actualBoards.columns.filter((column) => column.name !== tasksStatus)
-    
-      const actualBoardUpdate = {
-        ...actualBoards, 
-        columns: [...actualColumns, columns2],
-        }
-    
-        const index = boardLocal.findIndex((board) => board.id === actualBoards.id);
-        boardLocal[index] = actualBoardUpdate;
-        localStorage.removeItem('board');
-        localStorage.setItem('board', JSON.stringify(boardLocal));
-        updateActualBoards(actualBoardUpdate);
-        updateIsNewTask(false);
+    const colunmByName = actualBoards.columns.filter((column) => column.id === tasksStatus);
+
+    const tasks = {
+      id: uuidv4(),
+      title: taskTitle,
+      description: tasksDescription,
+      subtasks: subTasks,
+      status: colunmByName[0].name,
+    };
+
+    const columns2 = {...colunmByName[0], tasks: [...colunmByName[0].tasks, tasks]};
+  
+    const actualColumns = actualBoards.columns.map((column) => {
+      console.log(column.id, tasksStatus);
+      if (column.id === tasksStatus) {
+        return columns2;
+      }
+      return column;
+    });
+  
+    const actualBoardUpdate = {
+      ...actualBoards, 
+      columns: actualColumns,
+    };
+
+    // Atualize o array "boardLocal" com o "actualBoardUpdate"
+    const updatedBoardLocal = boardLocal.map((board) => {
+      console.log(board.id, actualBoards.id);
+      if (board.id === actualBoards.id) {
+        return actualBoardUpdate;
+      }
+      return board;
+    });
+
+    localStorage.removeItem('board');
+    localStorage.setItem('board', JSON.stringify(updatedBoardLocal));
+    updateActualBoards(actualBoardUpdate);
+    updateIsNewTask(false);
   };
 
   return (
@@ -138,25 +148,25 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 onChange={(e) => handleChange(e, setTasksdescription)}  
               />
             </div>
-              <label className={styles.label}>Subtaks</label>
+            <label className={styles.label} >Subtaks</label>
 
-              {subTasks && subTasks.map((inputValue, index) => (
-                <InputColumn 
-                  key={index}
-                  index={index}
-                  inputValue={inputValue.name}
-                  handleInputChange={handleInputChange}
-                  handleRemoveInput={handleRemoveInput}
-                />
-              ))}
-              
-              <button 
-                className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
-                onClick={handleAddInput}
-                type='button'
-              >
-                + add new subtask
-              </button>
+            {subTasks && subTasks.map((inputValue, index) => (
+              <InputColumn 
+                key={index}
+                index={index}
+                inputValue={inputValue.name}
+                handleInputChange={handleInputChange}
+                handleRemoveInput={handleRemoveInput}
+              />
+            ))}
+            
+            <button 
+              className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
+              onClick={handleAddInput}
+              type='button'
+            >
+              + add new subtask
+            </button>
 
 
             <label className={styles.label} htmlFor="">Status</label>
@@ -171,11 +181,12 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 {actualBoards.columns.map((column, index) => (
                   <option
                     key={index}
-                    value={column.name}
+                    value={column.id}
                   >
                     {column.name}
                   </option>
                 ))}
+                
               </select>
             </div>
             <button

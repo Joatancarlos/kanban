@@ -9,6 +9,7 @@ import useStore from '@/zustand/store';
 import styles from '../../page.module.css';
 import InputColumn from './InputColumn';
 import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
+import { v4 as uuidv4 } from 'uuid';
 
 const customStyles = {
   content: {
@@ -27,18 +28,17 @@ function ModalNewBoard({ titleModal, handleClick }) {
   const [modalNewBoard, updateModalNewBoard] = useStore((state) => 
   [state.modalNewBoard, state.updateModalNewBoard]
   );
-  const objInitial = {name: ''};
+  const objInitial = {name: '', id: uuidv4()}; 
   const [columns, setColumns] = useState([objInitial]);
   const [boardName, setBoardName] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
-  const [id, setId] = useState(Math.floor(Math.random() * 100000000));
-  
+  const [id, setId] = useState(uuidv4()); 
 
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
       try {
-        setId(Math.floor(Math.random() * 100000000));
+        setId(uuidv4()); 
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
@@ -51,7 +51,8 @@ function ModalNewBoard({ titleModal, handleClick }) {
   }
 
   const handleAddInput = (e) => {
-    setColumns([...columns, { name: e.target.value }]);
+    const newColumn = { name: e.target.value, id: uuidv4() };
+    setColumns([...columns, newColumn]);
   };
   
   const handleCheckInput = (value) => {

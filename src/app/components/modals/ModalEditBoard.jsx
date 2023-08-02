@@ -102,7 +102,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
             <h3>Edit Board</h3>
           </div>
           <form className={styles.formAdd}>
-            <label>Board Name</label>
+            <label className={styles.label}>Board Name</label>
             <div>
               <input 
                 className={styles.input} 
@@ -115,7 +115,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
             </div>
             { isDisabled && <p className={styles.error}>Please enter a name</p>}
             {actualBoard.length !== 0 && (
-              <label>Board Columns</label>
+              <label className={styles.label}>Board Columns</label>
             )}
           
             {columns && columns.map((_inputValue, index) => (
