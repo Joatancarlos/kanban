@@ -23,6 +23,7 @@ const Columns = ({columns}) => {
               title={title}
               subtasks={subtasks}
               description={description}
+              columns={columns}
             />
         ))}
 

@@ -488,7 +488,7 @@
 }
 
 .divColumns, .newColumn {
-  width: 280px;
+  width: 350px;
   height: 100%;
   margin: 25px;
   border-radius: 8px;
@@ -537,4 +537,57 @@
 .divTask:hover {
   cursor: pointer;
   color: var(--color-light-primary);
+}
+
+.headerModal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-l);
+  font-weight: 500;
+  color: var(--color-dark-secondary);
+  margin-bottom: 10px;
+}
+
+.check {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-white);
+  padding: 15px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+}
+
+.check:hover {
+  background-color: #625fc752;
+}
+
+.check input {
+  margin-right: 16px;
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+}
+
+.check input:checked {
+  background-color: var(--color-light-primary);
+}
+
+.check input:checked + span {
+  color: var(--color-dark-secondary);
+  text-decoration: line-through;
+}
+
+.check span {
+  font-weight: 700;
+  font-size: var(--font-size-m);
 }

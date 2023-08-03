@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const customStyles = {
   content: {
-    minWidth: '38vw', 
+    width: '520px', 
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -72,11 +72,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
       }
     });
 
-    console.log(actualBoards);
-
     const colunmByName = actualBoards.columns.filter((column) => column.id === tasksStatus);
-
-    console.log(colunmByName);
 
     const tasks = {
       id: uuidv4(),
@@ -89,7 +85,6 @@ function ModalAddTask({ titleModal, boardLocal }) {
     const columns2 = {...colunmByName[0], tasks: [...colunmByName[0].tasks, tasks]};
   
     const actualColumns = actualBoards.columns.map((column) => {
-      console.log(column.id, tasksStatus);
       if (column.id === tasksStatus) {
         return columns2;
       }

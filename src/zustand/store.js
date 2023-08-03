@@ -5,6 +5,8 @@ const useStore = create((set) => ({
   modalNewBoard: false,
   modalDeleteBoard: false,
   modalEditBoard: false,
+  modalDeleteTask: false,
+  modalEditTask: false,
   actualBoards: [],
   isDelete: false,
   isNewTask: false,
@@ -17,6 +19,8 @@ const useStore = create((set) => ({
   updateModalEditBoard: (modalEditBoard) => set(() => ({ modalEditBoard: modalEditBoard })),
   updateIsNewTask: (isNewTask) => set(() => ({ isNewTask: isNewTask })),
   updateTaskModal: (taskModal) => set(() => ({ taskModal: taskModal })),
+  updateModalDeleteTask: (modalDeleteTask) => set(() => ({ modalDeleteTask: modalDeleteTask })),
+  updateModalEditTask: (modalEditTask) => set(() => ({ modalEditTask: modalEditTask })),
 }))
 
 export default useStore;
