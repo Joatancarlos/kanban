@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import styles from '../../page.module.css';
 import useStore from '@/zustand/store';
 
-export default function ModalTask({ taskId, openModal }) {
+export default function ModalTask({ taskId, openModal, closeModal }) {
   const customStyles = {
     content: {
       top: '50%',
@@ -16,21 +16,21 @@ export default function ModalTask({ taskId, openModal }) {
     },
   };
 
-  const [
-    updateTaskModal,
-    taskModal,
-  ] = useStore((state) => [
-    state.updateTaskModal,
-    state.taskModal,
-  ]);
+  // const [
+  //   updateTaskModal,
+  //   taskModal,
+  // ] = useStore((state) => [
+  //   state.updateTaskModal,
+  //   state.taskModal,
+  // ]);
 
 
-  const closeModal = () => {
-    console.log('closeModal');
-    console.log(taskModal, 'taskModal');
-    updateTaskModal(!taskModal);
-    console.log(taskModal, 'taskModal');
-  };
+  // const closeModal = () => {
+  //   console.log('closeModal');
+  //   console.log(taskModal, 'taskModal');
+  //   updateTaskModal(!taskModal);
+  //   console.log(taskModal, 'taskModal');
+  // };
 
   return (
     <Modal

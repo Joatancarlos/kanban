@@ -5,33 +5,39 @@ import useStore from '@/zustand/store';
 
 
 export default function Task({id, title, subtasks}) {
-  const [
-    updateTaskModal,
-    taskModal,
-    idTask,
-  ] = useStore((state) => [
-    state.updateTaskModal,
-    state.taskModal,
-    state.idTask,
-  ]);
+  const [isTaskOpen, setIsTaskOpen] = useState(false);
+  // const [
+  //   updateTaskModal,
+  //   taskModal,
+  //   idTask,
+  // ] = useStore((state) => [
+  //   state.updateTaskModal,
+  //   state.taskModal,
+  //   state.idTask,
+  // ]);
 
   // console.log(idTask, 'idTask');
 
-  const modalOpen = idTask === id;
-  // console.log(modalOpen, 'modalOpen');
+  const toggleTask = () => {
+    setIsTaskOpen((prevState) => !prevState);
+  };
 
-  console.log(taskModal, 'taskModal');
+  // const modalOpen = idTask === id;
+  // // console.log(modalOpen, 'modalOpen');
+
+  // console.log(taskModal, 'taskModal');
   return (
-    <>
+    <div onClick={toggleTask} className={styles.divTask}>    
       <h3>{title}</h3>
       <p>{`0 of ${subtasks.length} subtasks`}</p>
-      {idTask === id && taskModal && (
+      {isTaskOpen && (
         <ModalTask
-          openModal={taskModal}
+          openModal={isTaskOpen}
           taskId={id}
+          closeModal={toggleTask}
         />
       )}
-    </>
+    </div>
   )
 }
 
