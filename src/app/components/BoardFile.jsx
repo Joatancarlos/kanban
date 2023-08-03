@@ -38,6 +38,8 @@ const Boards = ({id, title}) => {
       try {
         setBoardLocal(boards)
         if( id === actualBoards.id) {
+          // const actualBoard = boards.find((obj) => obj.id === id);
+          // updateActualBoards(actualBoard);
           setIsActive(true);
         } setIsActive(false);
 

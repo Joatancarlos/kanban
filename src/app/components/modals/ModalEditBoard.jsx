@@ -69,10 +69,13 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
     if (boardName.length > 1) {
       setIsDisabled(false);
       const columnsNotEmpty = columns.filter((col) => col.name !== "");
+      console.log(columnsNotEmpty, 'columnsNotEmpty');
       const editBoard = {
         id: actualBoard.id,
         name: boardName, 
-        columns: columnsNotEmpty,
+        columns: [
+          ...columnsNotEmpty
+        ],
       }
       const index = boardLocal.findIndex((board) => board.id === actualBoard.id);
       boardLocal[index] = editBoard;

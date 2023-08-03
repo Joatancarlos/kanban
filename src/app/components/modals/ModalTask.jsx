@@ -1,9 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import styles from '../../page.module.css';
-import useStore from '@/zustand/store';
 
-export default function ModalTask({ taskId, openModal, closeModal }) {
+export default function ModalTask({ taskId, openModal, closeModal, title, description, subtasks }) {
   const customStyles = {
     content: {
       top: '50%',
@@ -16,22 +15,6 @@ export default function ModalTask({ taskId, openModal, closeModal }) {
     },
   };
 
-  // const [
-  //   updateTaskModal,
-  //   taskModal,
-  // ] = useStore((state) => [
-  //   state.updateTaskModal,
-  //   state.taskModal,
-  // ]);
-
-
-  // const closeModal = () => {
-  //   console.log('closeModal');
-  //   console.log(taskModal, 'taskModal');
-  //   updateTaskModal(!taskModal);
-  //   console.log(taskModal, 'taskModal');
-  // };
-
   return (
     <Modal
       isOpen={openModal}
@@ -42,9 +25,14 @@ export default function ModalTask({ taskId, openModal, closeModal }) {
       ariaHideApp={false}
     >
       <div className={styles.modalDivDelete}>
-        <h1>Teste</h1>
-        <p>Task ID: {taskId}</p>
-        <button onClick={closeModal}>Close</button>
+        <h3>{title}</h3>
+        <p>{description}</p>
+        {subtasks && subtasks.map(({name}) => (
+            <div>
+              <input type="checkbox" name={name}/>
+              <span>{name}</span>
+            </div>
+        ))}
       </div>
     </Modal>
   );

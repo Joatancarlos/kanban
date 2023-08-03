@@ -72,7 +72,11 @@ function ModalAddTask({ titleModal, boardLocal }) {
       }
     });
 
+    console.log(actualBoards);
+
     const colunmByName = actualBoards.columns.filter((column) => column.id === tasksStatus);
+
+    console.log(colunmByName);
 
     const tasks = {
       id: uuidv4(),
