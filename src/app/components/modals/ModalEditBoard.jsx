@@ -69,7 +69,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
     if (boardName.length > 1) {
       setIsDisabled(false);
       const columnsNotEmpty = columns.filter((col) => col.name !== "");
-      console.log(columnsNotEmpty, 'columnsNotEmpty');
+
       const editBoard = {
         id: actualBoard.id,
         name: boardName, 

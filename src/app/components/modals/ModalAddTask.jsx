@@ -35,7 +35,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
 
   const [taskTitle, setTaskTitle] = useState('');
   const [tasksDescription, setTasksdescription] = useState('');
-  const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].name);
+  const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id);
   const [subTasks, setSubTasks] = useState([{ name: '' }]);
 
   const handleAddInput = (e) => {
