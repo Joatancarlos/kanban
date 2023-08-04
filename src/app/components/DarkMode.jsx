@@ -11,7 +11,7 @@ const DarkMode = () => {
 
   const toogleDarkMode = () => {
     updateIsDarkMode(!isDarkMode);
-    
+    localStorage.setItem('darkMode', !isDarkMode)
   };
   return (
     <div className={styles.darkMode}>
