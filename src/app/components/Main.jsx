@@ -17,7 +17,8 @@ export default function Main() {
       modalEditBoard,
       isDelete,
       updateModalEditBoard,
-      updateModalNewBoard
+      updateModalNewBoard,
+      isDarkMode,
   ] = useStore((state) => [
     state.isHidden, 
     state.updateHidden, 
@@ -26,7 +27,8 @@ export default function Main() {
     state.modalEditBoard,
     state.isNewTask,
     state.updateModalEditBoard,
-    state.updateModalNewBoard
+    state.updateModalNewBoard,
+    state.isDarkMode,
   ]);
 
   const [boardLocal, setBoardLocal] = useState([]);
@@ -75,7 +77,7 @@ export default function Main() {
         {columns.length !== 0 ? (
           <Columns columns={columns} />
         ) : (
-          <div className={`${styles.main} ${styles.mainEmptyBoard}`}>
+          <div className={isDarkMode ? `${styles.main} ${styles.mainEmptyBoard} ${styles.mainEmptyBoardDarkMode}` :`${styles.main} ${styles.mainEmptyBoard}`}>
             <div className={styles.emptyBoard}>
               <p>This board is empty. Create a new column to get started.</p>
               <button

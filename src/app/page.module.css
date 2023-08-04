@@ -614,17 +614,48 @@
   background-color: var(--color-dark-primary);
 }
 
-.isDarkMode .ReactModal__Content--after-open {
+.mainEmptyBoardDarkMode {
   background-color: var(--color-dark-primary);
 }
 
+.btnDarkMode {
+  background-color: var(--color-white);
+  color: var(--color-light-primary);
+}
+
+.containerModalDarkMode {
+  color: var(--color-white);
+}
+
+.containerModalDarkMode input {
+  background-color: var(--color-dark-primary-light);
+  margin-right: 16px;
+  margin-top: 3px;
+  width: 100%;
+  height: 16px;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+}
 
 
+.containerModalDarkMode input:checked {
+  background-color: var(--color-dark-primary);
+}
 
+.containerModalDarkMode input:checked + span {
+  color: var(--color-light-primary);
+  text-decoration: line-through;
+}
+
+.containerModalDarkMode span {
+  font-weight: 700;
+  font-size: var(--font-size-m);
+}
 
 .editDeleteBoxDarkMode {
   background-color: var(--color-dark-primary);
 }
+
+
 
 .divTaskDarkMode {
   background-color: var(--color-dark-primary-light);

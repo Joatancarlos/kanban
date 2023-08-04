@@ -8,7 +8,7 @@ import AsideBoards from './AsideBoards'
 import DarkMode from './DarkMode'
 import HideSidebar from './HideSidebar'
 import useStore from '@/zustand/store';
-import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
+import { getSavedBoards } from '@/helpers/boardLocal';
 
 
 export default function Aside() {
@@ -16,6 +16,7 @@ export default function Aside() {
   [state.isHidden, state.modalNewBoard, state.isDelete, state.actualBoards, state.isDarkMode]
   );
   const [boards, setBoards] = useState([])
+
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {

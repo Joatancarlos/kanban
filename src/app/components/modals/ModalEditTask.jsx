@@ -5,8 +5,8 @@ import useStore from '@/zustand/store';
 import InputColumn from './InputColumn';
 
 export default function ModalEditTask({ openModal, closeModal, title, columnEdit, taskId, boardLocal }) {
-  console.log(columnEdit.id, 'columnEdit');
-  console.log(taskId, 'taskId');
+  // console.log(columnEdit.id, 'columnEdit');
+  // console.log(taskId, 'taskId');
   const [
     actualBoards,
     modalDeleteTask,
@@ -59,7 +59,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
     setTaskTitle(taskToEdit.title);
     setTasksdescription(taskToEdit.description);
     setSubTasks(taskToEdit.subtasks);
-    console.log(tasks, 'tasks');
+    // console.log(tasks, 'tasks');
   };
 
   // useEffect(() => {
@@ -223,7 +223,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
       shouldCloseOnOverlayClick={true}
       style={customStyles}
     >
-      <div className={styles.containerModal}>
+      <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
         <div>
           <h3>{title}</h3>
         </div>
@@ -263,7 +263,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
           ))}
           
           <button 
-            className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
+            className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`} 
             onClick={handleAddInput}
             type='button'
           >

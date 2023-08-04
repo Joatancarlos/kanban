@@ -106,7 +106,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
         style={customStyles}
         ariaHideApp={false}
       >
-        <div className={styles.containerModal}>
+        <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
           <div>
             <h3>Edit Board</h3>
           </div>
@@ -138,7 +138,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
             ))}
             
             <button 
-              className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
+              className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`} 
               onClick={handleAddInput}
               type='button'
             >

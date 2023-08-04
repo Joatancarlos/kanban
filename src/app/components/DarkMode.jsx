@@ -9,8 +9,6 @@ import useStore from '@/zustand/store';
 const DarkMode = () => {
   const [isDarkMode, updateIsDarkMode] = useStore((state) => [state.isDarkMode, state.updateIsDarkMode]);
 
-  console.log(isDarkMode);
-
   return (
     <div className={styles.darkMode}>
       <div className={styles.toogleContent}>

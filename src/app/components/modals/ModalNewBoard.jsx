@@ -108,7 +108,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
         style={customStyles}
         ariaHideApp={false}
       >
-        <div className={styles.containerModal}>
+        <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
           <div>
             <h3>{titleModal}</h3>
           </div>
@@ -140,7 +140,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
             ))}
             
             <button 
-              className={` ${styles.btn} ${styles.btnSecondaryLight}`} 
+              className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`}  
               onClick={handleAddInput}
               type='button'
             >

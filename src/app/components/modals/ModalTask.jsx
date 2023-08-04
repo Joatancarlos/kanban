@@ -36,9 +36,9 @@ export default function ModalTask({ openModal, closeModal, title, description, s
   const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id || []);
   const [boardLocal, setBoardLocal] = useState([]);
   const [checked, setChecked] = useState([]);
-  const [indiceDaBoardAtual, setIndiceDaBoardAtual] = useState(0);
-  const [indiceDaColunaQContemATask, setIndiceDaColunaQContemATask] = useState(0);
-  const [indiceQContemASub, setIndiceQContemASub] = useState(0);
+  // const [indiceDaBoardAtual, setIndiceDaBoardAtual] = useState(0);
+  // const [indiceDaColunaQContemATask, setIndiceDaColunaQContemATask] = useState(0);
+  // const [indiceQContemASub, setIndiceQContemASub] = useState(0);
 
   const myElementRef = useRef(null);
 
@@ -57,24 +57,29 @@ export default function ModalTask({ openModal, closeModal, title, description, s
   };
 
 
-  useEffect(() => {
-    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
-    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
-    setIndiceDaBoardAtual(indiceDaBoardAtual);
-    setIndiceDaColunaQContemATask(indiceDaColunaQContemATask);
-    if(actualBoards.columns[indiceDaColunaQContemATask]){
-      const indiceQContemASub = actualBoards.columns[indiceDaColunaQContemATask].tasks.findIndex((task) => task.id === taskId)
-      setIndiceQContemASub(indiceQContemASub);
-    }
-  }, [actualBoards, columns, subtasks])
-  
+  // useEffect(() => {
+  //   const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
+  //   const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
+  //   setIndiceDaBoardAtual(indiceDaBoardAtual);
+  //   setIndiceDaColunaQContemATask(indiceDaColunaQContemATask);
+  //   if(actualBoards.columns[indiceDaColunaQContemATask]){
+  //     const indiceQContemASub = actualBoards.columns[indiceDaColunaQContemATask].tasks.findIndex((task) => task.id === taskId)
+  //     setIndiceQContemASub(indiceQContemASub);
+  //   }
+  // }, [actualBoards, columns, subtasks])
+  // console.log(actualBoards.id, 'ce9e22d3-f809-4c7c-ab43-ce3e0a63adda');
+  // console.log(boardLocal, 'boardLocal');
+  // console.log(indiceDaBoardAtual, 'indiceDaBoardAtual');
+  // console.log(indiceDaColunaQContemATask, 'indiceDaColunaQContemATask');
+
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
       try {
+        const filtro = subtasks.map((subtask) => subtask.checked)
         setBoardLocal(boards)
-        setChecked(subtasks.map((subtask) => subtask.checked))
-        setCheckActive(checked.filter((item) => item === true).length);
+        setChecked(filtro)
+        setCheckActive(filtro.filter((item) => item === true).length);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
@@ -82,7 +87,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
       setBoardLocal([])
       setChecked(subtasks.map((subtask) => subtask.checked))
     }
-  }, [modalNewBoard, actualBoards, subtasks]);
+  }, [actualBoards, subtasks]);
   
   const handleCheck = (index) => {
     const newChecked = [...checked];
@@ -90,10 +95,12 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     subtasks.forEach((subtask, i) => {subtask.checked = newChecked[i]})
     setChecked(newChecked);
     setCheckActive(newChecked.filter((item) => item === true).length);
-    
+    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
+    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
+    const indiceQContemASub = actualBoards.columns[indiceDaColunaQContemATask].tasks.findIndex((task) => task.id === taskId)
     actualBoards.columns[indiceDaColunaQContemATask].tasks[indiceQContemASub].subtasks = subtasks;
     boardLocal[indiceDaBoardAtual] = actualBoards;
-    console.log(boardLocal);
+    // console.log(boardLocal);
     // Salvar no localStorage
     localStorage.removeItem('board');
     localStorage.setItem('board', JSON.stringify(boardLocal));
@@ -126,11 +133,13 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     // Task removida
     const newTasks = columns.tasks.filter((column) => column.id !== taskId);
     // achar a coluna que tem a task e atualizar seu valor
+    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
+    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
     
     actualBoards.columns[indiceDaColunaQContemATask].tasks = newTasks;
-    console.log(actualBoards);
+    // console.log(actualBoards);
     boardLocal[indiceDaBoardAtual] = actualBoards;
-    console.log(boardLocal);
+    // console.log(boardLocal);
     // Salvar no localStorage
     localStorage.removeItem('board');
     localStorage.setItem('board', JSON.stringify(boardLocal));
@@ -154,7 +163,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
       style={customStyles}
       ariaHideApp={false}
     >
-      <div className={styles.containerModal}>
+      <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
         <div className={styles.headerModal}>
           <h3>{title}</h3>
           <button
@@ -170,11 +179,15 @@ export default function ModalTask({ openModal, closeModal, title, description, s
         </div>
         <p className={styles.description}>{description}</p>
         <label className={styles.label} htmlFor="">Subtasks ({checkActive} of {subtasks.length})</label>
-        {subtasks && subtasks.map(({name}, index) => (
-            <label className={styles.check} htmlFor={name} onChange={() => handleCheck(index)}>
-              <input type="checkbox" checked={ checked[index] } name={name} id={name}/>
-              <span>{name}</span>
-            </label>
+        {subtasks && subtasks.length !== 0 && subtasks.map(({name}, index) => (
+              <>
+              {name.length !== 0 && (
+                  <label className={styles.check} htmlFor={name} onChange={() => handleCheck(index)}>
+                      <input type="checkbox" checked={ checked[index] } name={name} id={name}/>
+                      <span>{name}</span>
+                  </label>
+                )}
+            </>
         ))}
         <label className={styles.label} htmlFor="">Current Status</label>
         <div>
