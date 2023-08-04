@@ -9,6 +9,10 @@ import useStore from '@/zustand/store';
 const DarkMode = () => {
   const [isDarkMode, updateIsDarkMode] = useStore((state) => [state.isDarkMode, state.updateIsDarkMode]);
 
+  const toogleDarkMode = () => {
+    updateIsDarkMode(!isDarkMode);
+    
+  };
   return (
     <div className={styles.darkMode}>
       <div className={styles.toogleContent}>
@@ -22,7 +26,7 @@ const DarkMode = () => {
               className={styles.flipswitch_cb} 
               id="fs" 
               checked={isDarkMode}
-              onChange={() => updateIsDarkMode(!isDarkMode)}
+              onChange={toogleDarkMode}
               />
             <label className={styles.flipswitch_label} htmlFor="fs">
                 <div className={styles.flipswitch_inner}></div>
