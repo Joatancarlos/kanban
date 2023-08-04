@@ -14,8 +14,8 @@
   --color-light-secondary-light: #20212c;
 
   /* Dark mode */
-  --color-dark-primary: rgb(43, 44, 55);
-  --color-dark-primary-light: rgb(62, 63, 78);
+  --color-dark-primary: #2b2c37;
+  --color-dark-primary-light: #3e3f4e;
   --color-dark-secondary: #828fa3;
   --color-dark-secondary-light: rgb(228, 235, 250);
 
