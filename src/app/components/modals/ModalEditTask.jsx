@@ -95,93 +95,121 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
   };
 
   const saveTask = () => {
-    // console.log(columnEdit.id, 'columnEdit.id');
-    // console.log(tasksStatus, 'tasksStatus');
-    if (columnEdit.id !== tasksStatus) { 
+    if (columnEdit.id !== tasksStatus) {
+      const newTasks = columnEdit.tasks.filter((column) => column.id !== taskId);
+    // achar a coluna que tem a task e atualizar seu valor
+    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columnEdit.id)
+    actualBoards.columns[indiceDaColunaQContemATask].tasks = newTasks;
 
+    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
+
+    boardLocal[indiceDaBoardAtual] = actualBoards;
     
+    // Salvar no localStorage
+    localStorage.removeItem('board');
+    localStorage.setItem('board', JSON.stringify(boardLocal));
+
+      // Filtrar a tarefa da coluna original
       const columnWithoutTask = columnEdit.tasks.filter((task) => task.id !== idTask);
       setColumnWithoutTask(columnWithoutTask);
-
-      const colunmById = actualBoards.columns.filter((column) => column.id === tasksStatus);
   
-      setTasks(colunmById.tasks);
-      setColumn(colunmById[0]);
+      // Obter a coluna de destino
+      const targetColumn = actualBoards.columns.find((column) => column.id === tasksStatus);
+  
+      // Atualizar a propriedade tasks da coluna de destino com a tarefa editada
+      const taskEdit = {
+        id: idTask,
+        title: taskTitle,
+        description: tasksDescription,
+        subtasks: subTasks,
+        status: tasksStatus,
+      };
+  
+      const updatedTasks = [...targetColumn.tasks, taskEdit];
+  
+      const columnWithEditedTask = {
+        ...targetColumn,
+        tasks: updatedTasks,
+      };
+  
+      // Atualizar o array actualBoards.columns para refletir as alterações
+      const updatedColumns = actualBoards.columns.map((column) => {
+        if (column.id === tasksStatus) {
+          return columnWithEditedTask;
+        }
+        return column;
+      });
+  
+      const updatedBoard = {
+        ...actualBoards,
+        columns: updatedColumns,
+      };
+  
+      // Atualizar o estado com o board atualizado
+      updateActualBoards(updatedBoard);
+  
+      // Atualizar o local storage
+      const updatedBoardLocal = boardLocal.map((board) => {
+        if (board.id === actualBoards.id) {
+          return updatedBoard;
+        }
+        return board;
+      });
+  
+      localStorage.removeItem('board');
+      localStorage.setItem('board', JSON.stringify(updatedBoardLocal));
+    } else {
+      // Se a coluna permanecer a mesma, apenas atualize a tarefa dentro da mesma coluna
+      const taskEdit = {
+        id: idTask,
+        title: taskTitle,
+        description: tasksDescription,
+        subtasks: subTasks,
+        status: tasksStatus,
+      };
+  
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === idTask) {
+          return taskEdit;
+        }
+        return task;
+      });
+  
+      const columnWithEditedTask = {
+        ...columnEdit,
+        tasks: updatedTasks,
+      };
+  
+      const updatedColumns = actualBoards.columns.map((column) => {
+        if (column.id === tasksStatus) {
+          return columnWithEditedTask;
+        }
+        return column;
+      });
+  
+      const updatedBoard = {
+        ...actualBoards,
+        columns: updatedColumns,
+      };
+  
+      // Atualizar o estado com o board atualizado
+      updateActualBoards(updatedBoard);
+  
+      // Atualizar o local storage
+      const updatedBoardLocal = boardLocal.map((board) => {
+        if (board.id === actualBoards.id) {
+          return updatedBoard;
+        }
+        return board;
+      });
+  
+      localStorage.removeItem('board');
+      localStorage.setItem('board', JSON.stringify(updatedBoardLocal));
     }
   
-    // console.log(tasks, 'tasks');
-    console.log(idTask, 'idTask');
-    console.log(columnEdit.tasks, 'columnEdit.tasks');
-    // console.log(taskTitle, 'taskTitle');
-    // console.log(tasksDescription, 'tasksDescription');
-    // console.log(subTasks, 'subTasks');
-    // console.log(tasksStatus, 'tasksStatus');
-    console.log(columnWithoutTask, 'columnWithoutTask');
-
-    const taskEdit = {
-      id: idTask,
-      title: taskTitle,
-      description: tasksDescription,
-      subtasks: subTasks,
-      status: tasksStatus,
-    };
-  
-    const tasksWithoutEditing = tasks.filter((task) => task.id !== idTask);
-  
-    console.log(tasksWithoutEditing, 'tasksWithoutEditing');
-
-    const updatedTasks = [...tasksWithoutEditing, taskEdit];
-    
-    console.log(updatedTasks, 'updatedTasks');
-
-    const actualtask = updatedTasks.map((task) => {
-      if (task.id === idTask) {
-        return taskEdit;
-      }
-      return task;
-    });
-  
-    console.log(actualtask, 'actualtask');
-
-    const columnWithEditedTask = {
-      ...column,
-      tasks: actualtask,
-    };
-  
-    console.log(columnWithEditedTask, 'columnWithEditedTask');
-
-    const actualColumns = actualBoards.columns.map((column) => {
-      if (column.id === tasksStatus) {
-        return columnWithEditedTask;
-      }
-      return column;
-    });
-    
-    console.log(actualColumns, 'actualColumns');
-  
-    const actualBoardUpdate = {
-      ...actualBoards, 
-      columns: [
-        ...actualColumns
-      ],
-    };
-  
-    console.log(actualBoardUpdate, 'actualBoardUpdate');
-    
-    const updatedBoardLocal = boardLocal.map((board) => {
-      if (board.id === actualBoards.id) {
-        return actualBoardUpdate;
-      }
-      return board;
-    });
-
-    console.log(updatedBoardLocal, 'updatedBoardLocal');
-  
-    localStorage.removeItem('board');
-    localStorage.setItem('board', JSON.stringify(updatedBoardLocal));
-    updateActualBoards(actualBoardUpdate);
-    closeModal(!openModal)
+    closeModal(!openModal);
   };
+  
 
   return (
     <div>

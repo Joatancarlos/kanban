@@ -31,7 +31,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     state.updateIsDelete
   ]);
   const [isVisible, setIsVisible] = useState(false);
-  const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id);
+  const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id || []);
   const [checkActive, setCheckActive] = useState(0);
   const [checked, setChecked] = useState([]);
   const myElementRef = useRef(null);
