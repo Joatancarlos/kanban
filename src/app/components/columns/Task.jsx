@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import ModalTask from '../modals/ModalTask';
 import styles from '../../page.module.css';
+import useStore from '@/zustand/store';
 
 export default function Task({id, title, subtasks, description, columns}) {
+  const [isDarkMode] = useStore((state) => [state.isDarkMode]);
   const [isTaskOpen, setIsTaskOpen] = useState(false);
-
+  const [checkActive, setCheckActive] = useState(0);
   const toggleTask = () => {
     setIsTaskOpen(!isTaskOpen);
   };
@@ -14,9 +16,9 @@ export default function Task({id, title, subtasks, description, columns}) {
 
   return (
     <div>
-      <div onClick={toggleTask} className={styles.divTask}>
+      <div onClick={toggleTask} className={isDarkMode ? `${styles.divTask} ${styles.divTaskDarkMode}` : styles.divTask}>
         <h3>{title}</h3>
-        <p>{`0 of ${subtasks.length} subtasks`}</p>
+        <p>{`${checkActive} of ${subtasks.length} subtasks`}</p>
       </div>
         <ModalTask
           openModal={isTaskOpen}
@@ -26,6 +28,8 @@ export default function Task({id, title, subtasks, description, columns}) {
           subtasks={subtasks}
           description={description}
           columns={columnByTask}
+          checkActive={checkActive}
+          setCheckActive={setCheckActive}
         />
     </div>
   )

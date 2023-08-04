@@ -4,11 +4,11 @@ import Modal from 'react-modal';
 import useStore from '@/zustand/store';
 import styles from '../../page.module.css';
 import InputColumn from './InputColumn';
-import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function ModalEditBoard({actualBoard, boardLocal}) {
-  const [modalEditBoard, updateModalEditBoard, isDelete, updateIsDelete] = useStore((state) =>
-    [state.modalEditBoard, state.updateModalEditBoard, state.isDelete, state.updateIsDelete]
+  const [modalEditBoard, updateModalEditBoard, isDelete, updateIsDelete, isDarkMode] = useStore((state) =>
+    [state.modalEditBoard, state.updateModalEditBoard, state.isDelete, state.updateIsDelete, state.isDarkMode]
   );
   const objInitial = {name: ''};
   const [columns, setColumns] = useState([objInitial]);
@@ -30,6 +30,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
     },
   };
   function fecharModal() {
@@ -66,6 +67,11 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
   };
 
   const saveBoard = () => {
+    columns.map((column) => {
+      if (column.id === undefined) {
+        column.id = uuidv4();
+      }
+    });
     if (boardName.length > 1) {
       setIsDisabled(false);
       const columnsNotEmpty = columns.filter((col) => col.name !== "");

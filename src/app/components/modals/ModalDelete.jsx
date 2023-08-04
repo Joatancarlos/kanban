@@ -1,8 +1,10 @@
 import React from 'react'
 import Modal from 'react-modal';
 import styles from '../../page.module.css'
+import useStore from '@/zustand/store';
 
 export default function ModalDelete({boardOrTask , modalDeleteBoard, showDeleteBox, deleteFunction, children}) {
+  const [isDarkMode] = useStore((state) => [state.isDarkMode])
   const customStyles = {
     content: {
       top: '50%',
@@ -12,6 +14,7 @@ export default function ModalDelete({boardOrTask , modalDeleteBoard, showDeleteB
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       transition: 'all 0.4s ease-in-out',
+      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
     },
   };
   return (

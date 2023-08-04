@@ -1,13 +1,15 @@
 "use client";
-import { useState } from 'react';
 import styles from '../page.module.css';
 import moonLigth from '../../images/icon-dark-theme.svg';
 import sunLight from '../../images/icon-light-theme.svg';
 
 import Image from 'next/image'; 
+import useStore from '@/zustand/store';
 
 const DarkMode = () => {
-  const [checked, setChecked] = useState(false);
+  const [isDarkMode, updateIsDarkMode] = useStore((state) => [state.isDarkMode, state.updateIsDarkMode]);
+
+  console.log(isDarkMode);
 
   return (
     <div className={styles.darkMode}>
@@ -21,8 +23,8 @@ const DarkMode = () => {
               name="flipswitch" 
               className={styles.flipswitch_cb} 
               id="fs" 
-              checked={checked}
-              onChange={() => setChecked(!checked)}
+              checked={isDarkMode}
+              onChange={() => updateIsDarkMode(!isDarkMode)}
               />
             <label className={styles.flipswitch_label} htmlFor="fs">
                 <div className={styles.flipswitch_inner}></div>

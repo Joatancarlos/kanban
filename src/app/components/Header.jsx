@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
-import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
+import { getSavedBoards } from '@/helpers/boardLocal';
 import styles from '../page.module.css'
 import Image from 'next/image'
 import verticalEllipsis from '../../images/icon-vertical-ellipsis.svg'
@@ -42,8 +42,6 @@ export default function Header() {
 
   const myElementRef = useRef(null);
   const handleClickOutside = (event) => {
-    // console.log(myElementRef);
-    // console.log(event.target);
 
     if (myElementRef.current && !myElementRef.current.contains(event.target)) {
       setIsVisible(false);
@@ -78,11 +76,11 @@ export default function Header() {
         if(actualBoards.columns.length === 0) {
           setIsDisabled(true);
           return;
-        } setIsDisabled(false);
+        } return setIsDisabled(false);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
-    }
+    } setIsDisabled(true) 
   }, [actualBoards]);
 
   const showEditBox = () => {

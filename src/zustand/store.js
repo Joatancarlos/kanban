@@ -11,6 +11,7 @@ const useStore = create((set) => ({
   isDelete: false,
   isNewTask: false,
   taskModal: false,
+  isDarkMode: false,
   updateHidden: (hidden) => set(() => ({ isHidden: hidden })),
   updateModalNewBoard: (modalNewBoard) => set(() => ({ modalNewBoard: modalNewBoard })),
   updateActualBoards: (boards) => set(() => ({ actualBoards: boards })),
@@ -21,6 +22,7 @@ const useStore = create((set) => ({
   updateTaskModal: (taskModal) => set(() => ({ taskModal: taskModal })),
   updateModalDeleteTask: (modalDeleteTask) => set(() => ({ modalDeleteTask: modalDeleteTask })),
   updateModalEditTask: (modalEditTask) => set(() => ({ modalEditTask: modalEditTask })),
+  updateIsDarkMode: (isDarkMode) => set(() => ({ isDarkMode: isDarkMode })),
 }))
 
 export default useStore;

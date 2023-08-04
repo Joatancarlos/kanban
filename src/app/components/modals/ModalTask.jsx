@@ -10,7 +10,7 @@ import ModalEditTask from './ModalEditTask';
 import { getSavedBoards } from '@/helpers/boardLocal';
 
 
-export default function ModalTask({ openModal, closeModal, title, description, subtasks, columns, taskId }) {
+export default function ModalTask({ openModal, closeModal, title, description, subtasks, columns, taskId, checkActive, setCheckActive }) {
   const [
     actualBoards,
     modalDeleteTask,
@@ -19,7 +19,8 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     updateModalDeleteTask,
     updateModalEditTask,
     isDelete,
-    updateIsDelete
+    updateIsDelete,
+    isDarkMode,
   ] = useStore((state) => [
     state.actualBoards,
     state.modalDeleteTask,
@@ -28,12 +29,17 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     state.updateModalDeleteTask,
     state.updateModalEditTask,
     state.isDelete,
-    state.updateIsDelete
+    state.updateIsDelete,
+    state.isDarkMode,
   ]);
   const [isVisible, setIsVisible] = useState(false);
   const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id || []);
-  const [checkActive, setCheckActive] = useState(0);
+  const [boardLocal, setBoardLocal] = useState([]);
   const [checked, setChecked] = useState([]);
+  const [indiceDaBoardAtual, setIndiceDaBoardAtual] = useState(0);
+  const [indiceDaColunaQContemATask, setIndiceDaColunaQContemATask] = useState(0);
+  const [indiceQContemASub, setIndiceQContemASub] = useState(0);
+
   const myElementRef = useRef(null);
 
   const customStyles = {
@@ -46,35 +52,51 @@ export default function ModalTask({ openModal, closeModal, title, description, s
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       transition: 'all 0.4s ease-in-out',
+      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
     },
   };
 
-  const [boardLocal, setBoardLocal] = useState([]);
 
+  useEffect(() => {
+    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
+    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
+    setIndiceDaBoardAtual(indiceDaBoardAtual);
+    setIndiceDaColunaQContemATask(indiceDaColunaQContemATask);
+    if(actualBoards.columns[indiceDaColunaQContemATask]){
+      const indiceQContemASub = actualBoards.columns[indiceDaColunaQContemATask].tasks.findIndex((task) => task.id === taskId)
+      setIndiceQContemASub(indiceQContemASub);
+    }
+  }, [actualBoards, columns, subtasks])
+  
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
       try {
-        // console.log(boards, 'boards');
-        // valores atualizados
         setBoardLocal(boards)
+        setChecked(subtasks.map((subtask) => subtask.checked))
+        setCheckActive(checked.filter((item) => item === true).length);
       } catch (error) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
     } else {
       setBoardLocal([])
+      setChecked(subtasks.map((subtask) => subtask.checked))
     }
-  }, [modalNewBoard, actualBoards]);
+  }, [modalNewBoard, actualBoards, subtasks]);
   
   const handleCheck = (index) => {
     const newChecked = [...checked];
     newChecked[index] = !newChecked[index];
+    subtasks.forEach((subtask, i) => {subtask.checked = newChecked[i]})
     setChecked(newChecked);
     setCheckActive(newChecked.filter((item) => item === true).length);
-    // if(target.contains(input.current)){
-    //   console.log(input.current);
-      
-    // }
+    
+    actualBoards.columns[indiceDaColunaQContemATask].tasks[indiceQContemASub].subtasks = subtasks;
+    boardLocal[indiceDaBoardAtual] = actualBoards;
+    console.log(boardLocal);
+    // Salvar no localStorage
+    localStorage.removeItem('board');
+    localStorage.setItem('board', JSON.stringify(boardLocal));
   }
   const handleClickOutside = (event) => {
     // console.log(myElementRef);
@@ -104,10 +126,9 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     // Task removida
     const newTasks = columns.tasks.filter((column) => column.id !== taskId);
     // achar a coluna que tem a task e atualizar seu valor
-    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
+    
     actualBoards.columns[indiceDaColunaQContemATask].tasks = newTasks;
     console.log(actualBoards);
-    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
     boardLocal[indiceDaBoardAtual] = actualBoards;
     console.log(boardLocal);
     // Salvar no localStorage

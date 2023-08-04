@@ -15,7 +15,7 @@ export default function Main() {
       modalNewBoard, 
       actualBoards, 
       modalEditBoard,
-      isNewTask,
+      isDelete,
       updateModalEditBoard,
       updateModalNewBoard
   ] = useStore((state) => [
@@ -47,6 +47,7 @@ export default function Main() {
       }
     } else {
       setBoardLocal([])
+      setColumns([]);
     }
   }, [modalNewBoard, actualBoards]);
 
@@ -70,8 +71,7 @@ export default function Main() {
   // console.log(boardLocal[0].columns, 'boardLocal linha 58');
   // até aqui o boardLocal está vindo com as colunas atualizadas
   return (
-    <main className={isHidden ? styles.hiddenMain : styles.main}>
-      {/* {console.log(columns, 'columns')} */}
+    <main className={isHidden ? `${styles.hiddenMain} ${styles.customScrollbar}` : `${styles.main} ${styles.customScrollbar}`}>
         {columns.length !== 0 ? (
           <Columns columns={columns} />
         ) : (

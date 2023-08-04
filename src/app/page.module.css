@@ -591,3 +591,75 @@
   font-weight: 700;
   font-size: var(--font-size-m);
 }
+
+
+/* DARK MODE */
+
+.isDarkMode {
+  background-color: var(--color-dark-primary-light);
+  color: var(--color-white);
+}
+
+.isDarkMode main {
+  background-color: var(--color-dark-primary);
+  color: var(--color-white);
+}
+
+.isDarkMode main button {
+  background: var(--color-dark-primary-light);
+  color: var(--color-white);
+}
+
+.isDarkMode aside .toogleContent {
+  background-color: var(--color-dark-primary);
+}
+
+.isDarkMode .ReactModal__Content--after-open {
+  background-color: var(--color-dark-primary);
+}
+
+
+
+
+
+.editDeleteBoxDarkMode {
+  background-color: var(--color-dark-primary);
+}
+
+.divTaskDarkMode {
+  background-color: var(--color-dark-primary-light);
+}
+/* SCROLL BAR */
+
+/* Estilos para a barra de rolagem dentro da classe .darkMode */
+.layout ::-webkit-scrollbar {
+  height: 8px;
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+/* Estilo do botão na barra de rolagem (para clicar e arrastar) */
+.layout ::-webkit-scrollbar-thumb {
+  background-color: var(--color-light-primary); /* Cor do botão */
+  border-radius: 4px; /* Borda arredondada do botão */
+}
+
+/* Estilo de fundo da barra de rolagem (área onde o botão se move) */
+.layout ::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Cor de fundo */
+}
+
+/* Estilo do botão na barra de rolagem quando está sendo clicado ou arrastado */
+.layout ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-dark-primary-light); /* Cor do botão quando hover */
+}
+
+/* Estilo do botão na barra de rolagem quando está no começo ou no final do conteúdo */
+.layout ::-webkit-scrollbar-thumb:vertical {
+  background-color: var(--color-light-primary); /* Cor do botão quando no começo ou no final do conteúdo */
+}
+
+/* Estilo de fundo da barra de rolagem quando está no começo ou no final do conteúdo */
+.layout ::-webkit-scrollbar-track:vertical {
+  background-color: #f1f1f1; /* Cor de fundo quando no começo ou no final do conteúdo */
+}
+

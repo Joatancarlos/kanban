@@ -11,28 +11,28 @@ import InputColumn from './InputColumn';
 import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
 import { v4 as uuidv4 } from 'uuid';
 
-const customStyles = {
-  content: {
-    minWidth: '38vw', 
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-
 function ModalNewBoard({ titleModal, handleClick }) {
-  const [modalNewBoard, updateModalNewBoard] = useStore((state) => 
-  [state.modalNewBoard, state.updateModalNewBoard]
+  const [modalNewBoard, updateModalNewBoard, isDarkMode] = useStore((state) => 
+  [state.modalNewBoard, state.updateModalNewBoard, state.isDarkMode]
   );
   const objInitial = {name: '', id: uuidv4()}; 
   const [columns, setColumns] = useState([objInitial]);
   const [boardName, setBoardName] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
   const [id, setId] = useState(uuidv4()); 
+
+  const customStyles = {
+    content: {
+      minWidth: '38vw', 
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+    },
+  };
 
   useEffect(() => {
     const boards = getSavedBoards('board');

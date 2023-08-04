@@ -12,8 +12,8 @@ import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
 
 
 export default function Aside() {
-  const [isHidden, modalNewBoard, isDelete, actualBoards] = useStore((state) => 
-  [state.isHidden, state.modalNewBoard, state.isDelete, state.actualBoards]
+  const [isHidden, modalNewBoard, isDelete, actualBoards, isDarkMode] = useStore((state) => 
+  [state.isHidden, state.modalNewBoard, state.isDelete, state.actualBoards, state.isDarkMode]
   );
   const [boards, setBoards] = useState([])
   useEffect(() => {
@@ -32,8 +32,9 @@ export default function Aside() {
   return (
     <aside className={isHidden ? styles.hiddenAsideContainer : styles.asideContainer}>
       
+      
       <div className={isHidden ? styles.hiddenLogo : styles.logo}>
-          <Image src={logoDark} alt="Kanban Logo" width={150} height={25} priority />
+          <Image src={isDarkMode ? logoLight : logoDark  } alt="Kanban Logo" width={150} height={25} priority />
       </div>
       <div className={isHidden ? styles.hiddenAsideContent : styles.asideContent}> 
         <div>

@@ -14,6 +14,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
     updateModalDeleteTask,
     updateModalEditTask,
     updateActualBoards,
+    isDarkMode,
   ] = useStore((state) => [
     state.actualBoards,
     state.modalDeleteTask,
@@ -21,6 +22,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
     state.updateModalDeleteTask,
     state.updateModalEditTask,
     state.updateActualBoards,
+    state.isDarkMode,
   ]);
   const [isVisible, setIsVisible] = useState(false);
   const [tasks, setTasks] = useState(columnEdit.tasks);
@@ -46,6 +48,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       transition: 'all 0.4s ease-in-out',
+      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
     },
   };
 

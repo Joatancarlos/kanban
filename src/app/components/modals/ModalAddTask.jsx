@@ -8,38 +8,43 @@ import InputColumn from './InputColumn';
 import styles from '../../page.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-const customStyles = {
-  content: {
-    width: '520px', 
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 
 function ModalAddTask({ titleModal, boardLocal }) {
   // Hook que demonstra se a modal está aberta ou não
   const [isNewTask, 
-        actualBoards, 
-        updateIsNewTask, 
-        updateActualBoards
-      ] = useStore((state) => 
-        [ state.isNewTask, 
-          state.actualBoards,
-          state.updateIsNewTask, 
-          state.updateActualBoards]
-        );
+    actualBoards, 
+    updateIsNewTask, 
+    updateActualBoards,
+    isDarkMode,
+  ] = useStore((state) => 
+  [ state.isNewTask, 
+    state.actualBoards,
+    state.updateIsNewTask, 
+    state.updateActualBoards,
+    state.isDarkMode,
+  ]
+    );
+
+    const customStyles = {
+      content: {
+        width: '520px', 
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+      },
+    };
 
   const [taskTitle, setTaskTitle] = useState('');
   const [tasksDescription, setTasksdescription] = useState('');
   const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id);
-  const [subTasks, setSubTasks] = useState([{ name: '' }]);
+  const [subTasks, setSubTasks] = useState([{ name: '', checked: false }]);
 
   const handleAddInput = (e) => {
-    setSubTasks([...subTasks, { name: e.target.value }]);
+    setSubTasks([...subTasks, { name: e.target.value, checked: false }]);
   };
   
   const handleCheckInput = (value) => {
@@ -110,7 +115,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
     updateActualBoards(actualBoardUpdate);
     updateIsNewTask(false);
   };
-
+  console.log(subTasks)
   return (
     <div>
       <Modal
@@ -119,6 +124,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
         contentLabel="Modal de exemplo"
         shouldCloseOnOverlayClick={true}
         style={customStyles}
+        ariaHideApp={false}
       >
         <div className={styles.containerModal}>
           <div>
