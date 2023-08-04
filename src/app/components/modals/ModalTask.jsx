@@ -17,7 +17,9 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     modalEditTask,
     modalNewBoard,
     updateModalDeleteTask,
-    updateModalEditTask
+    updateModalEditTask,
+    isDelete,
+    updateIsDelete
   ] = useStore((state) => [
     state.actualBoards,
     state.modalDeleteTask,
@@ -25,6 +27,8 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     state.modalNewBoard,
     state.updateModalDeleteTask,
     state.updateModalEditTask,
+    state.isDelete,
+    state.updateIsDelete
   ]);
   const [isVisible, setIsVisible] = useState(false);
   const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id);
@@ -96,8 +100,22 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     updateModalDeleteTask(!modalDeleteTask);
   }
 
-  const deleteBoard = () => {
-    console.log('delete board');
+  const deleteTask = () => {
+    // Task removida
+    const newTasks = columns.tasks.filter((column) => column.id !== taskId);
+    // achar a coluna que tem a task e atualizar seu valor
+    const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
+    actualBoards.columns[indiceDaColunaQContemATask].tasks = newTasks;
+    console.log(actualBoards);
+    const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
+    boardLocal[indiceDaBoardAtual] = actualBoards;
+    console.log(boardLocal);
+    // Salvar no localStorage
+    localStorage.removeItem('board');
+    localStorage.setItem('board', JSON.stringify(boardLocal));
+    updateIsDelete(!isDelete);
+    showDeleteBox();
+    closeModal();
   }
 
     
@@ -169,7 +187,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
           boardOrTask={'task'}
           modalDeleteBoard={modalDeleteTask} 
           showDeleteBox={showDeleteBox}
-          deleteFunction={deleteBoard}
+          deleteFunction={deleteTask}
         >
           {`Are you sure you want to delete the '${title}' task and its subtasks? This action cannot be reversed.`}
         </ModalDelete>
