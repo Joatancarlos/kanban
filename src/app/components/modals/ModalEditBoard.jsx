@@ -23,6 +23,15 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
 
   const custom = customStyles(isDarkMode);
 
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   function fecharModal() {
     updateModalEditBoard(false);
   }
@@ -60,6 +69,9 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
     columns.map((column) => {
       if (column.id === undefined) {
         column.id = uuidv4();
+      }
+      if (column.backgroundColor === undefined) {
+        column.backgroundColor = getRandomColor();
       }
     });
     if (boardName.length > 1) {

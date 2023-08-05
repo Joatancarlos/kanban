@@ -116,7 +116,6 @@ export default function Header() {
     updateIsNewTask(!isNewTask);
   };
 
-  console.log(actualBoards);
   return (
     <header className={styles.header}>
         <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>

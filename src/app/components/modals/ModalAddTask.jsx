@@ -190,6 +190,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
               type="button"
               onClick={saveTask}
               className={` ${styles.btn} ${styles.btnPrimaryLight}`}
+              disabled={taskTitle === ''}
             >
               Create Task
             </button>

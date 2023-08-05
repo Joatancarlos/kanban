@@ -13,10 +13,13 @@ const Columns = ({columns}) => {
 
   return (
     <>
-
-    {columns && columns.map(({name, tasks},i) => (
+    {columns && columns.map(({name, tasks, backgroundColor},i) => (
+      
       <div className={styles.divColumns} key={`${name}-${i}`}>
-        <h3 className={styles.titleColumn}>{`${name} (${tasks ? tasks.length : "0"})`}</h3>
+          <div className={styles.randomColorAndTitle}>
+            <div style={{ backgroundColor }} className={styles.divRandomColor} /> 
+            <h3 className={styles.titleColumn}>{`${name} (${tasks ? tasks.length : "0"})`}</h3>
+          </div>
         {tasks && tasks.map(({id, title, subtasks, description}) => (
             <Task 
               key={`${id}-${title}`}
