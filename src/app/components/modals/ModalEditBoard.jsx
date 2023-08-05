@@ -5,6 +5,7 @@ import useStore from '@/zustand/store';
 import styles from '../../page.module.css';
 import InputColumn from './InputColumn';
 import { v4 as uuidv4 } from 'uuid';
+import { customStyles } from './customStyles';
 
 export default function ModalEditBoard({actualBoard, boardLocal}) {
   const [modalEditBoard, updateModalEditBoard, isDelete, updateIsDelete, isDarkMode] = useStore((state) =>
@@ -21,18 +22,21 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
   }, [actualBoard]);
 
   // console.log(columns, 'columns');
-  const customStyles = {
-    content: {
-      minWidth: '38vw', 
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-    },
-  };
+  // const customStyles = {
+  //   content: {
+  //     minWidth: '38vw', 
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+  //   },
+  // };
+
+  const custom = customStyles(isDarkMode);
+
   function fecharModal() {
     updateModalEditBoard(false);
   }
@@ -103,7 +107,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
         onRequestClose={fecharModal}
         contentLabel="Modal de exemplo"
         shouldCloseOnOverlayClick={true}
-        style={customStyles}
+        style={custom}
         ariaHideApp={false}
       >
         <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
@@ -114,7 +118,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
             <label className={styles.label}>Board Name</label>
             <div>
               <input 
-                className={styles.input} 
+                className={isDarkMode ? styles.inputDark : styles.input} 
                 type="text" 
                 placeholder="e.g. Web Design"
                 value={boardName}
@@ -134,6 +138,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
                 inputValue={columns[index].name}
                 handleInputChange={handleInputChange}
                 handleRemoveInput={handleRemoveInput}
+                isDarkMode={isDarkMode}
               />
             ))}
             

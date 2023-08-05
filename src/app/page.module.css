@@ -302,7 +302,7 @@
   box-shadow: 0px 0px 2px -1px black;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   left: 0;
 }
@@ -340,20 +340,25 @@
   
 } */
 
-.input {
+.input, .inputDark {
   border: 1px solid rgba(130, 143, 163, 0.25);
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-  margin: 5px 0;
+  margin: 10px 0;
+  font-weight: 600;
+
 }
 
-.input:focus {
+.input:focus, .inputDark:focus {
   outline: none;
   border: 1px solid var(--color-light-primary);
 }
 
-
+.inputDark {
+  background-color: var(--color-dark-primary-light);
+  color: var(--color-white);
+}
 
 .textarea {
   resize: none;
@@ -365,7 +370,7 @@
   justify-content: space-between;
 }
 
-.inputWithClose .input {
+.inputWithClose .input, .inputWithClose .inputDark {
   width: 90%;
 }
 
@@ -554,11 +559,10 @@
   margin-bottom: 10px;
 }
 
-.check {
+.check, .checkDark {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: var(--color-white);
   padding: 15px;
   margin: 5px 0;
   cursor: pointer;
@@ -566,11 +570,23 @@
   border-radius: 8px;
 }
 
+.check {
+  background-color: var(--color-white);
+}
+
+.checkDark {
+  background-color: var(--color-dark-primary-light);
+}
+
 .check:hover {
   background-color: #625fc752;
 }
 
-.check input {
+.checkDark:hover {
+  background-color: #625fc7a6;
+}
+
+.check input, .checkDark input {
   margin-right: 16px;
   margin-top: 3px;
   width: 16px;
@@ -578,16 +594,16 @@
   border: 1px solid rgba(130, 143, 163, 0.25);
 }
 
-.check input:checked {
+.check input:checked, .checkDark input:checked {
   background-color: var(--color-light-primary);
 }
 
-.check input:checked + span {
+.check input:checked + span, .checkDark input:checked + span {
   color: var(--color-dark-secondary);
   text-decoration: line-through;
 }
 
-.check span {
+.check span, .checkDark span {
   font-weight: 700;
   font-size: var(--font-size-m);
 }
@@ -597,18 +613,18 @@
 
 .isDarkMode {
   background-color: var(--color-dark-primary-light);
-  color: var(--color-white);
+  color: var(--color-dark-secondary);
 }
 
-.isDarkMode main {
+.isDarkMode .main, .isDarkMode .hiddenMain {
   background-color: var(--color-dark-primary);
   color: var(--color-white);
 }
 
-.isDarkMode main button {
+/* .isDarkMode .main button {
   background: var(--color-dark-primary-light);
   color: var(--color-white);
-}
+} */
 
 .isDarkMode aside .toogleContent {
   background-color: var(--color-dark-primary);
@@ -627,7 +643,7 @@
   color: var(--color-white);
 }
 
-.containerModalDarkMode input {
+/* .containerModalDarkMode input {
   background-color: var(--color-dark-primary-light);
   margin-right: 16px;
   margin-top: 3px;
@@ -650,7 +666,7 @@
   font-weight: 700;
   font-size: var(--font-size-m);
 }
-
+*/
 .editDeleteBoxDarkMode {
   background-color: var(--color-dark-primary);
 }
@@ -677,6 +693,7 @@
 /* Estilo de fundo da barra de rolagem (área onde o botão se move) */
 .layout ::-webkit-scrollbar-track {
   background-color: #f1f1f1; /* Cor de fundo */
+  cursor: pointer;
 }
 
 /* Estilo do botão na barra de rolagem quando está sendo clicado ou arrastado */

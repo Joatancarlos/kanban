@@ -4,12 +4,12 @@ import closeIcon from '../../../images/icon-cross.svg'
 import styles from '../../page.module.css';
 
 
-export default function InputColumn({ index, handleInputChange, handleRemoveInput, inputValue}) {
+export default function InputColumn({ index, handleInputChange, handleRemoveInput, inputValue, isDarkMode}) {
   return (
     <div className={styles.inputWithClose}>
       <input
         type="text"
-        className={styles.input}
+        className={isDarkMode ? styles.inputDark : styles.input}
         placeholder="e.g. Todo"
         value={inputValue}
         onChange={(e) => handleInputChange(index, e.target.value)}

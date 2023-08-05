@@ -21,6 +21,7 @@ export default function Header() {
       modalEditBoard,
       updateModalEditBoard,
       updateIsNewTask,
+      isDarkMode,
     ] = useStore(state => (
     [state.actualBoards,
       state.updateActualBoards,
@@ -32,7 +33,8 @@ export default function Header() {
       state.updateIsDelete,
       state.modalEditBoard,
       state.updateModalEditBoard,
-      state.updateIsNewTask
+      state.updateIsNewTask,
+      state.isDarkMode,
     ]
   ));
 
@@ -117,7 +119,7 @@ export default function Header() {
   // console.log(actualBoards);
   return (
     <header className={styles.header}>
-        <h1>{actualBoards.name}</h1>
+        <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>
         <div className={styles.btns_header}>
           <button 
             className={` ${styles.btn} ${styles.btnPrimaryLight}`}

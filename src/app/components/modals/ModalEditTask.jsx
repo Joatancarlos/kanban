@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import styles from '../../page.module.css';
 import useStore from '@/zustand/store';
 import InputColumn from './InputColumn';
+import { customStyles } from './customStyles';
 
 export default function ModalEditTask({ openModal, closeModal, title, columnEdit, taskId, boardLocal }) {
   // console.log(columnEdit.id, 'columnEdit');
@@ -38,19 +39,21 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
 
   const myElementRef = useRef(null);
 
-  const customStyles = {
-    content: {
-      width: '520px',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      transition: 'all 0.4s ease-in-out',
-      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-    },
-  };
+  // const customStyles = {
+  //   content: {
+  //     width: '520px',
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     transition: 'all 0.4s ease-in-out',
+  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+  //   },
+  // };
+
+  const custom = customStyles(isDarkMode);
 
   const saveInfoTasksState = () => {
     const taskToEdit = columnEdit.tasks.find((task) => task.id === taskId);
@@ -221,7 +224,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
       onRequestClose={() => closeModal(!openModal)}
       contentLabel="Modal de exemplo"
       shouldCloseOnOverlayClick={true}
-      style={customStyles}
+      style={custom}
     >
       <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
         <div>
@@ -231,7 +234,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
           <label className={styles.label}>Title</label>
           <div>
             <input 
-              className={styles.input}
+              className={isDarkMode ? styles.inputDark : styles.input}
               type="text" 
               placeholder="e.g. Take coffee break" 
               value={taskTitle}
@@ -242,7 +245,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
           <div>
             <textarea 
               name="description"
-              className={`${styles.input} ${styles.textarea}`} 
+              className={isDarkMode ? `${styles.inputDark} ${styles.textarea}` : `${styles.input} ${styles.textarea}`} 
               id="desc" 
               maxLength={100}
               placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
@@ -259,6 +262,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
               inputValue={inputValue.name}
               handleInputChange={handleInputChange}
               handleRemoveInput={handleRemoveInput}
+              isDarkMode={isDarkMode}
             />
           ))}
           
@@ -278,7 +282,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
               id=""
               value={tasksStatus}
               onChange={(e) => handleChange(e, setTasksStatus)}  
-              className={`${styles.input} ${styles.select}`}
+              className={isDarkMode ? `${styles.inputDark} ${styles.select}` : `${styles.input} ${styles.select}`}
             >
               {actualBoards.columns.map((column, index) => (
                 <option

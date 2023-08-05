@@ -2,28 +2,32 @@ import React from 'react'
 import Modal from 'react-modal';
 import styles from '../../page.module.css'
 import useStore from '@/zustand/store';
+import { customStyles } from './customStyles';
 
 export default function ModalDelete({boardOrTask , modalDeleteBoard, showDeleteBox, deleteFunction, children}) {
   const [isDarkMode] = useStore((state) => [state.isDarkMode])
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      transition: 'all 0.4s ease-in-out',
-      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-    },
-  };
+  // const customStyles = {
+  //   content: {
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     transition: 'all 0.4s ease-in-out',
+  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+  //   },
+  // };
+  
+  let custom = customStyles(isDarkMode);
+  custom.content.width = '';
   return (
     <Modal
         isOpen={modalDeleteBoard}
         onRequestClose={showDeleteBox}
         contentLabel="Delete Modal"
         shouldCloseOnOverlayClick={true}
-        style={customStyles}
+        style={custom}
         ariaHideApp={false}
       >
         <div className={styles.modalDivDelete}>

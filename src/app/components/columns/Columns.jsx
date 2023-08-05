@@ -5,9 +5,10 @@ import Task from './Task';
 
 const Columns = ({columns}) => {
   const [
-    updateModalEditBoard,
+    updateModalEditBoard, isDarkMode
   ] = useStore((state) => [
     state.updateModalEditBoard,
+    state.isDarkMode
   ]);
 
   return (
@@ -32,7 +33,7 @@ const Columns = ({columns}) => {
     ))}
     <button
       onClick={() => updateModalEditBoard(true)}
-      className={styles.newColumn} type="button">
+      className={isDarkMode ? `${styles.newColumn} ${styles.isDarkMode}` : styles.newColumn} type="button">
       + new column
     </button>
     </>

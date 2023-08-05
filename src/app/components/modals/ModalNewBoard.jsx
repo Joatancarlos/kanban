@@ -10,6 +10,7 @@ import styles from '../../page.module.css';
 import InputColumn from './InputColumn';
 import { getSavedBoards, saveBoards } from '@/helpers/boardLocal';
 import { v4 as uuidv4 } from 'uuid';
+import { customStyles } from './customStyles';
 
 function ModalNewBoard({ titleModal, handleClick }) {
   const [modalNewBoard, updateModalNewBoard, isDarkMode] = useStore((state) => 
@@ -21,18 +22,21 @@ function ModalNewBoard({ titleModal, handleClick }) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [id, setId] = useState(uuidv4()); 
 
-  const customStyles = {
-    content: {
-      minWidth: '38vw', 
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-    },
-  };
+  // const customStyles = {
+  //   overlay: {
+  //     backgroundColor: isDarkMode ? "rgb(43, 44, 55, .8)" : "rgb(250, 250, 250, .7)",
+  //   },
+  //   content: {
+  //     width: '38vw', 
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+  //   },
+  // };
 
   useEffect(() => {
     const boards = getSavedBoards('board');
@@ -97,7 +101,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
     }
     
   };
-
+  const custom = customStyles(isDarkMode);
   return (
     <div>
       <Modal
@@ -105,7 +109,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
         onRequestClose={fecharModal}
         contentLabel="Modal de exemplo"
         shouldCloseOnOverlayClick={true}
-        style={customStyles}
+        style={custom}
         ariaHideApp={false}
       >
         <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
@@ -116,7 +120,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
             <label>Name</label>
             <div>
               <input 
-                className={styles.input} 
+                className={isDarkMode ? styles.inputDark : styles.input} 
                 type="text" 
                 placeholder="e.g. Web Design" 
                 value={boardName}
@@ -136,6 +140,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
                 inputValue={inputValue.name}
                 handleInputChange={handleInputChange}
                 handleRemoveInput={handleRemoveInput}
+                isDarkMode={isDarkMode}
               />
             ))}
             

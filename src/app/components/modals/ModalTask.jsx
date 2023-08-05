@@ -8,6 +8,7 @@ import EditDeleteBox from './EditDeleteBox';
 import ModalDelete from './ModalDelete';
 import ModalEditTask from './ModalEditTask';
 import { getSavedBoards } from '@/helpers/boardLocal';
+import { customStyles } from './customStyles';
 
 
 export default function ModalTask({ openModal, closeModal, title, description, subtasks, columns, taskId, checkActive, setCheckActive }) {
@@ -33,7 +34,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
     state.isDarkMode,
   ]);
   const [isVisible, setIsVisible] = useState(false);
-  const [tasksStatus, setTasksStatus] = useState(actualBoards.columns[0].id || []);
+  const [tasksStatus, setTasksStatus] = useState([]);
   const [boardLocal, setBoardLocal] = useState([]);
   const [checked, setChecked] = useState([]);
   // const [indiceDaBoardAtual, setIndiceDaBoardAtual] = useState(0);
@@ -42,21 +43,21 @@ export default function ModalTask({ openModal, closeModal, title, description, s
 
   const myElementRef = useRef(null);
 
-  const customStyles = {
-    content: {
-      width: '520px',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      transition: 'all 0.4s ease-in-out',
-      backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-    },
-  };
+  // const customStyles = {
+  //   content: {
+  //     width: '520px',
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     transition: 'all 0.4s ease-in-out',
+  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+  //   },
+  // };
 
-
+  const custom = customStyles(isDarkMode);
   // useEffect(() => {
   //   const indiceDaBoardAtual = boardLocal.findIndex((board) => board.id === actualBoards.id);
   //   const indiceDaColunaQContemATask = actualBoards.columns.findIndex((column) => column.id === columns.id)
@@ -160,7 +161,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
       onRequestClose={closeModal}
       contentLabel="Delete Modal"
       shouldCloseOnOverlayClick={true}
-      style={customStyles}
+      style={custom}
       ariaHideApp={false}
     >
       <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
@@ -182,7 +183,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
         {subtasks && subtasks.length !== 0 && subtasks.map(({name}, index) => (
               <>
               {name.length !== 0 && (
-                  <label className={styles.check} htmlFor={name} onChange={() => handleCheck(index)}>
+                  <label className={isDarkMode ? styles.checkDark : styles.check} htmlFor={name} onChange={() => handleCheck(index)}>
                       <input type="checkbox" checked={ checked[index] } name={name} id={name}/>
                       <span>{name}</span>
                   </label>
@@ -196,7 +197,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
               id=""
               value={tasksStatus}
               onChange={(e) => handleChange(e, setTasksStatus)}  
-              className={`${styles.input} ${styles.select}`}
+              className={isDarkMode ? `${styles.inputDark} ${styles.select}` : `${styles.input} ${styles.select}`}
             >
               {actualBoards.columns.map((column, index) => (
                 <option

@@ -7,6 +7,7 @@ import useStore from '@/zustand/store';
 import InputColumn from './InputColumn';
 import styles from '../../page.module.css';
 import { v4 as uuidv4 } from 'uuid';
+import { customStyles } from './customStyles';
 
 
 function ModalAddTask({ titleModal, boardLocal }) {
@@ -25,18 +26,20 @@ function ModalAddTask({ titleModal, boardLocal }) {
   ]
     );
 
-    const customStyles = {
-      content: {
-        width: '520px', 
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-      },
-    };
+    // const customStyles = {
+    //   content: {
+    //     width: '520px', 
+    //     top: '50%',
+    //     left: '50%',
+    //     right: 'auto',
+    //     bottom: 'auto',
+    //     marginRight: '-50%',
+    //     transform: 'translate(-50%, -50%)',
+    //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
+    //   },
+    // };
+
+  const custom = customStyles(isDarkMode);
 
   const [taskTitle, setTaskTitle] = useState('');
   const [tasksDescription, setTasksdescription] = useState('');
@@ -123,7 +126,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
         onRequestClose={() => updateIsNewTask(false)}
         contentLabel="Modal de exemplo"
         shouldCloseOnOverlayClick={true}
-        style={customStyles}
+        style={custom}
         ariaHideApp={false}
       >
         <div className={isDarkMode ? `${styles.containerModal} ${styles.containerModalDarkMode}` : styles.containerModal}>
@@ -134,7 +137,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
             <label className={styles.label}>Title</label>
             <div>
               <input 
-                className={styles.input}
+                className={isDarkMode ? styles.inputDark : styles.input}
                 type="text" 
                 placeholder="e.g. Take coffee break" 
                 value={taskTitle}
@@ -145,7 +148,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
             <div>
               <textarea 
                 name="description"
-                className={`${styles.input} ${styles.textarea}`} 
+                className={isDarkMode ? `${styles.inputDark} ${styles.textarea}` : `${styles.input} ${styles.textarea}`} 
                 id="desc" 
                 maxLength={100}
                 placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
@@ -162,6 +165,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 inputValue={inputValue.name}
                 handleInputChange={handleInputChange}
                 handleRemoveInput={handleRemoveInput}
+                isDarkMode={isDarkMode}
               />
             ))}
             
@@ -181,7 +185,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
                 id=""
                 value={tasksStatus}
                 onChange={(e) => handleChange(e, setTasksStatus)}  
-                className={`${styles.input} ${styles.select}`}
+                className={isDarkMode ? `${styles.inputDark} ${styles.select}` : `${styles.input} ${styles.select}`}
               >
                 {actualBoards.columns.map((column, index) => (
                   <option
