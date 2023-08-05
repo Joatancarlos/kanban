@@ -6,8 +6,6 @@ import InputColumn from './InputColumn';
 import { customStyles } from './customStyles';
 
 export default function ModalEditTask({ openModal, closeModal, title, columnEdit, taskId, boardLocal }) {
-  // console.log(columnEdit.id, 'columnEdit');
-  // console.log(taskId, 'taskId');
   const [
     actualBoards,
     modalDeleteTask,
@@ -39,20 +37,6 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
 
   const myElementRef = useRef(null);
 
-  // const customStyles = {
-  //   content: {
-  //     width: '520px',
-  //     top: '50%',
-  //     left: '50%',
-  //     right: 'auto',
-  //     bottom: 'auto',
-  //     marginRight: '-50%',
-  //     transform: 'translate(-50%, -50%)',
-  //     transition: 'all 0.4s ease-in-out',
-  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-  //   },
-  // };
-
   const custom = customStyles(isDarkMode);
 
   const saveInfoTasksState = () => {
@@ -62,12 +46,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
     setTaskTitle(taskToEdit.title);
     setTasksdescription(taskToEdit.description);
     setSubTasks(taskToEdit.subtasks);
-    // console.log(tasks, 'tasks');
   };
-
-  // useEffect(() => {
-  //   setTasks(columnEdit.tasks);
-  // }, [columnEdit.tasks]);
 
   useEffect(() => {
     saveInfoTasksState();
@@ -255,16 +234,19 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
           </div>
           <label className={styles.label} >Subtaks</label>
 
-          {subTasks && subTasks.map((inputValue, index) => (
-            <InputColumn 
-              key={index}
-              index={index}
-              inputValue={inputValue.name}
-              handleInputChange={handleInputChange}
-              handleRemoveInput={handleRemoveInput}
-              isDarkMode={isDarkMode}
-            />
-          ))}
+          <div className={styles.conatinerInputCollumn}> 
+            {subTasks && subTasks.map((inputValue, index) => (
+              <InputColumn 
+                key={index}
+                index={index}
+                inputValue={inputValue.name}
+                handleInputChange={handleInputChange}
+                handleRemoveInput={handleRemoveInput}
+                isDarkMode={isDarkMode}
+              />
+              ))}
+          </div>
+
           
           <button 
             className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`} 

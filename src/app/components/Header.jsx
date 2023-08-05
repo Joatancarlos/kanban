@@ -116,7 +116,7 @@ export default function Header() {
     updateIsNewTask(!isNewTask);
   };
 
-  // console.log(actualBoards);
+  console.log(actualBoards);
   return (
     <header className={styles.header}>
         <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>
@@ -135,6 +135,7 @@ export default function Header() {
                 event.stopPropagation()
               }}
               style={{ padding: '5px' }}
+              disabled={actualBoards.length !== 0 ? false : true}
               ref={myElementRef}
             >
               <Image src={verticalEllipsis} alt="Vertical Ellipsis" />

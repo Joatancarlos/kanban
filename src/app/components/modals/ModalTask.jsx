@@ -179,17 +179,21 @@ export default function ModalTask({ openModal, closeModal, title, description, s
             </button>
         </div>
         <p className={styles.description}>{description}</p>
+
         <label className={styles.label} htmlFor="">Subtasks ({checkActive} of {subtasks.length})</label>
-        {subtasks && subtasks.length !== 0 && subtasks.map(({name}, index) => (
-              <>
-              {name.length !== 0 && (
-                  <label className={isDarkMode ? styles.checkDark : styles.check} htmlFor={name} onChange={() => handleCheck(index)}>
-                      <input type="checkbox" checked={ checked[index] } name={name} id={name}/>
-                      <span>{name}</span>
-                  </label>
-                )}
-            </>
-        ))}
+        <div className={styles.conatinerInputCollumn}>
+          {subtasks && subtasks.length !== 0 && subtasks.map(({name}, index) => (
+                <>
+                {name.length !== 0 && (
+                    <label className={isDarkMode ? styles.checkDark : styles.check} htmlFor={name} onChange={() => handleCheck(index)}>
+                        <input type="checkbox" checked={ checked[index] } name={name} id={name}/>
+                        <span>{name}</span>
+                    </label>
+                  )}
+              </>
+          ))}
+        </div>
+
         <label className={styles.label} htmlFor="">Current Status</label>
         <div>
             <select 
@@ -199,7 +203,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
               onChange={(e) => handleChange(e, setTasksStatus)}  
               className={isDarkMode ? `${styles.inputDark} ${styles.select}` : `${styles.input} ${styles.select}`}
             >
-              {actualBoards.columns.map((column, index) => (
+              {actualBoards && actualBoards.columns.map((column, index) => (
                 <option
                   key={index}
                   value={column.id}

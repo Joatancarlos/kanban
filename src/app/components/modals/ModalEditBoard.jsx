@@ -21,20 +21,6 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
     setColumns(actualBoard.columns);
   }, [actualBoard]);
 
-  // console.log(columns, 'columns');
-  // const customStyles = {
-  //   content: {
-  //     minWidth: '38vw', 
-  //     top: '50%',
-  //     left: '50%',
-  //     right: 'auto',
-  //     bottom: 'auto',
-  //     marginRight: '-50%',
-  //     transform: 'translate(-50%, -50%)',
-  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-  //   },
-  // };
-
   const custom = customStyles(isDarkMode);
 
   function fecharModal() {
@@ -131,6 +117,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
               <label className={styles.label}>Board Columns</label>
             )}
           
+          <div className={styles.conatinerInputCollumn}>
             {columns && columns.map((_inputValue, index) => (
               <InputColumn 
                 key={index}
@@ -141,6 +128,7 @@ export default function ModalEditBoard({actualBoard, boardLocal}) {
                 isDarkMode={isDarkMode}
               />
             ))}
+          </div>
             
             <button 
               className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`} 

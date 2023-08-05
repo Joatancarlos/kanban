@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useEffect, useState } from 'react';
-// Importa o modal do react-modal
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import useStore from '@/zustand/store';
 import InputColumn from './InputColumn';
@@ -11,7 +10,7 @@ import { customStyles } from './customStyles';
 
 
 function ModalAddTask({ titleModal, boardLocal }) {
-  // Hook que demonstra se a modal está aberta ou não
+
   const [isNewTask, 
     actualBoards, 
     updateIsNewTask, 
@@ -25,19 +24,6 @@ function ModalAddTask({ titleModal, boardLocal }) {
     state.isDarkMode,
   ]
     );
-
-    // const customStyles = {
-    //   content: {
-    //     width: '520px', 
-    //     top: '50%',
-    //     left: '50%',
-    //     right: 'auto',
-    //     bottom: 'auto',
-    //     marginRight: '-50%',
-    //     transform: 'translate(-50%, -50%)',
-    //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-    //   },
-    // };
 
   const custom = customStyles(isDarkMode);
 
@@ -158,16 +144,18 @@ function ModalAddTask({ titleModal, boardLocal }) {
             </div>
             <label className={styles.label} >Subtaks</label>
 
-            {subTasks && subTasks.map((inputValue, index) => (
-              <InputColumn 
-                key={index}
-                index={index}
-                inputValue={inputValue.name}
-                handleInputChange={handleInputChange}
-                handleRemoveInput={handleRemoveInput}
-                isDarkMode={isDarkMode}
-              />
-            ))}
+            <div className={styles.conatinerInputCollumn}>
+              {subTasks && subTasks.map((inputValue, index) => (
+                <InputColumn 
+                  key={index}
+                  index={index}
+                  inputValue={inputValue.name}
+                  handleInputChange={handleInputChange}
+                  handleRemoveInput={handleRemoveInput}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
             
             <button 
               className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`}  

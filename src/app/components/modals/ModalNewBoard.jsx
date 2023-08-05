@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect, useState } from 'react';
-// Importa a modal do react-modal
 import Modal from 'react-modal';
-import Image from 'next/image';
-import closeIcon from '../../../images/icon-cross.svg'
 import useStore from '@/zustand/store';
 import styles from '../../page.module.css';
 import InputColumn from './InputColumn';
@@ -22,22 +19,6 @@ function ModalNewBoard({ titleModal, handleClick }) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [id, setId] = useState(uuidv4()); 
 
-  // const customStyles = {
-  //   overlay: {
-  //     backgroundColor: isDarkMode ? "rgb(43, 44, 55, .8)" : "rgb(250, 250, 250, .7)",
-  //   },
-  //   content: {
-  //     width: '38vw', 
-  //     top: '50%',
-  //     left: '50%',
-  //     right: 'auto',
-  //     bottom: 'auto',
-  //     marginRight: '-50%',
-  //     transform: 'translate(-50%, -50%)',
-  //     backgroundColor: isDarkMode ? "#2B2C37" : "#fff",
-  //   },
-  // };
-
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
@@ -47,7 +28,6 @@ function ModalNewBoard({ titleModal, handleClick }) {
         console.error('Erro ao fazer parsing JSON:', error);
       }
     }
-    // handleCheckInput();
   }, []);
 
   function fecharModal() {
@@ -75,7 +55,6 @@ function ModalNewBoard({ titleModal, handleClick }) {
   const handleRemoveInput = (index) => {
     const newInputs = [...columns];
     const newInput = newInputs.filter((_col, i) => i !== index)
-    // newInputs.splice(index, 1);
     setColumns(newInput);
   };
   
@@ -133,6 +112,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
               <label>Columns</label>
             )}
           
+          <div className={styles.conatinerInputCollumn}>
             {columns && columns.map((inputValue, index) => (
               <InputColumn 
                 key={index}
@@ -143,6 +123,7 @@ function ModalNewBoard({ titleModal, handleClick }) {
                 isDarkMode={isDarkMode}
               />
             ))}
+          </div>
             
             <button 
               className={isDarkMode ? ` ${styles.btn} ${styles.btnSecondaryLight} ${styles.btnDarkMode}` : ` ${styles.btn} ${styles.btnSecondaryLight}`}  
