@@ -281,6 +281,7 @@ export default function ModalEditTask({ openModal, closeModal, title, columnEdit
             type="button"
             onClick={saveTask}
             className={` ${styles.btn} ${styles.btnPrimaryLight}`}
+            disabled={taskTitle === ''}
           >
             Edit Task
           </button>

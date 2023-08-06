@@ -203,7 +203,7 @@ export default function ModalTask({ openModal, closeModal, title, description, s
               onChange={(e) => handleChange(e, setTasksStatus)}  
               className={isDarkMode ? `${styles.inputDark} ${styles.select}` : `${styles.input} ${styles.select}`}
             >
-              {actualBoards && actualBoards.columns.map((column, index) => (
+              {actualBoards && actualBoards.length !== 0 && actualBoards.columns.map((column, index) => (
                 <option
                   key={index}
                   value={column.id}

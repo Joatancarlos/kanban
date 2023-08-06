@@ -67,12 +67,13 @@ function ModalAddTask({ titleModal, boardLocal }) {
     });
 
     const colunmByName = actualBoards.columns.filter((column) => column.id === tasksStatus);
+    const subTasksNotEmpty = subTasks.filter((subTask) => subTask.name !== '');
 
     const tasks = {
       id: uuidv4(),
       title: taskTitle,
       description: tasksDescription,
-      subtasks: subTasks,
+      subtasks: subTasksNotEmpty,
       status: colunmByName[0].name,
     };
 
@@ -190,6 +191,7 @@ function ModalAddTask({ titleModal, boardLocal }) {
               type="button"
               onClick={saveTask}
               className={` ${styles.btn} ${styles.btnPrimaryLight}`}
+              disabled={taskTitle === ''}
             >
               Create Task
             </button>

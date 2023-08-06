@@ -60,6 +60,11 @@
   background-color: rgba(98, 95, 199, 0.432);
 }
 
+.btn:disabled{
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .btnElli {
   padding: 2px;
 }
@@ -550,6 +555,20 @@
   overflow-y: auto;
 }
 
+.randomColorAndTitle {
+  display: flex;
+  align-items: center;
+}
+
+.divRandomColor {
+  display: flex;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+  margin-bottom: 20px;
+  margin-right: 12px;
+}
+
 .headerModal {
   display: flex;
   justify-content: space-between;
@@ -681,6 +700,7 @@
 
 .divTaskDarkMode {
   background-color: var(--color-dark-primary-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 /* SCROLL BAR */
 
