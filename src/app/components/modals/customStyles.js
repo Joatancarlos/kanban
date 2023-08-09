@@ -1,10 +1,29 @@
 export const customStyles = (isDarkMode) => {
+  const vw = window.innerWidth;
+  let width = 0;
+  switch (true) {
+    case vw < 500 :
+      width = '70vw';
+      break;
+    case vw < 700:
+      width = '65vw';
+      break;
+    case vw < 1000:
+      width = '50vw';
+      break;
+    case vw < 1200:
+      width = '40vw';
+      break;
+    default:
+      width = '38vw';
+      break;
+  }
   return {
     overlay: {
       backgroundColor: isDarkMode ? "rgb(0, 0, 0, .8)" : "rgb(250, 250, 250, .7)",
     },
     content: {
-      width: '38vw', 
+      width, 
       top: '50%',
       left: '50%',
       right: 'auto',

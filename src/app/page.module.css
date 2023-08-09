@@ -367,8 +367,16 @@
 
 .textarea {
   resize: none;
+  height: 80px;
+  font-weight: 600;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
 }
 
+/* .options {
+  padding: 10px;
+  font-size: var(--font-size-s);
+} */
 
 .inputWithClose {
   display: flex;
@@ -678,9 +686,6 @@
 }
 
 
-.containerModalDarkMode input:checked {
-  background-color: var(--color-dark-primary);
-}
 
 .containerModalDarkMode input:checked + span {
   color: var(--color-light-primary);
@@ -693,7 +698,7 @@
 }
 */
 .editDeleteBoxDarkMode {
-  background-color: var(--color-dark-primary);
+  background-color: var(--color-light-secondary-light);
 }
 
 
@@ -770,4 +775,31 @@
 /* Estilo de fundo da barra de rolagem quando está no começo ou no final do conteúdo */
 .conatinerInputCollumn ::-webkit-scrollbar-track:vertical {
   background-color: #f1f1f1; /* Cor de fundo quando no começo ou no final do conteúdo */
+}
+
+
+@media (min-width: 700px) and (max-width: 849px) {
+  .divColumns, .newColumn {
+    width: 280px;
+  }
+
+  .editDeleteBox {
+    min-width: 20vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 699px) {
+  .divColumns, .newColumn {
+    width: 250px;
+  }
+  .btns_header {
+    width: 170px;
+  }
+
+  .btn {
+    padding: 12px 15px;
+  }
+  .editDeleteBox {
+    min-width: 25vw;
+  }
 }
