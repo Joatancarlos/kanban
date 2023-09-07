@@ -179,7 +179,7 @@ export default function Header() {
               <button
                 onClick={() => setShowAside(true)}
                 type="button"
-                className={styles.showAside}
+                className={isDarkMode ? `${styles.showAside} ${styles.containerModalDarkMode}` : styles.showAside}
               >
                 {actualBoards.name}
                 <Image src={iconChevronDown} alt="Logo Mobile"/>
