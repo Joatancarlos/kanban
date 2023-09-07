@@ -43,15 +43,30 @@ export default function Header() {
   ));
 
   const [isVisible, setIsVisible] = useState(false);
+  const [isVisibleMobile, setIsVisibleMobile] = useState(false);
   const [boardLocal, setBoardLocal] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const [showAside, setShowAside] = useState(false);
 
+  console.log(isVisible, 'isVisible')
+  console.log(isVisibleMobile, 'isVisibleMobile')
+
   const myElementRef = useRef(null);
+  const myElementRefMobile = useRef(null);
+
+  console.log(myElementRef)
+  console.log(myElementRefMobile)
   const handleClickOutside = (event) => {
-    
+    console.log('to na função')
     if (myElementRef.current && !myElementRef.current.contains(event.target)) {
       setIsVisible(false);
+      console.log('entrei no primeiro if')
+
+    }
+
+    if (myElementRefMobile.current && !myElementRefMobile.current.contains(event.target)) {
+      setIsVisibleMobile(false);
+      console.log('entrei no segundo if')
     }
   };
 
@@ -145,30 +160,6 @@ export default function Header() {
               >
                 <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
               </button>
-              {isVisible && (
-                <EditDeleteBox
-                  whosEdit="Board"
-                  whosDelete="Board"
-                  handleClickEdit={showEditBox}
-                  handleClickDelete={showDeleteBox}
-                />
-              )}
-              {modalDeleteBoard && (
-                <ModalDelete
-                  boardOrTask={'board'}
-                  modalDeleteBoard={modalDeleteBoard}
-                  showDeleteBox={showDeleteBox}
-                  deleteFunction={deleteBoard}
-                >
-                  {`Are you sure you want to delete the '${actualBoards.name}' board? This action will remove all columns and tasks and cannot be reversed.`}
-                </ModalDelete>
-              )}
-              {isNewTask && (
-                <ModalAddTask
-                  titleModal="Add New Task"
-                  boardLocal={boardLocal}
-                />
-              )}
             </div>
           </div>
         </div>
@@ -197,16 +188,27 @@ export default function Header() {
             <div className={styles.divElli}>
               <button
                 onClick={(event) => {
-                  setIsVisible(!isVisible)
+                  setIsVisibleMobile(!isVisibleMobile)
                   event.stopPropagation()
                 }}
                 style={{ padding: '5px' }}
                 disabled={actualBoards.length !== 0 ? false : true}
-                ref={myElementRef}
+                ref={myElementRefMobile}
               >
                 <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
               </button>
+            </div>
+          </div>
+        </div>
               {isVisible && (
+                <EditDeleteBox
+                  whosEdit="Board"
+                  whosDelete="Board"
+                  handleClickEdit={showEditBox}
+                  handleClickDelete={showDeleteBox}
+                />
+              )}
+              {isVisibleMobile && (
                 <EditDeleteBox
                   whosEdit="Board"
                   whosDelete="Board"
@@ -238,9 +240,6 @@ export default function Header() {
                   />
                 </div>
               )}
-            </div>
-          </div>
-        </div>
     </header>
   )
 }
