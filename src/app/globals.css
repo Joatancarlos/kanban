@@ -110,5 +110,6 @@ label {
 @media (max-width: 480px) {
   :root {
     --width-layout: 100vw;
+    --heigth-header-and-aside: 10vh;
   }
 }

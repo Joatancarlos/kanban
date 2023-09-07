@@ -11,6 +11,7 @@ import useStore from '@/zustand/store';
 import EditDeleteBox from './modals/EditDeleteBox';
 import ModalDelete from './modals/ModalDelete';
 import ModalAddTask from './modals/ModalAddTask';
+import ModalAsideMobile from './modals/ModalAsideMobile';
 
 export default function Header() {
   const [actualBoards,
@@ -44,13 +45,11 @@ export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
   const [boardLocal, setBoardLocal] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [showAside, setShowAside] = useState(false);
 
   const myElementRef = useRef(null);
-  const myElementRef2 = useRef(null);
-  console.log(myElementRef);
-  console.log(myElementRef2);
   const handleClickOutside = (event) => {
-
+    
     if (myElementRef.current && !myElementRef.current.contains(event.target)) {
       setIsVisible(false);
     }
@@ -177,9 +176,13 @@ export default function Header() {
           <div className={styles.logoMobile}>
             <Image src={logoMobile} alt="Logo Mobile" />
             <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>
-              <button type="button" className={styles.showAside}>
+              <button
+                onClick={() => setShowAside(true)}
+                type="button"
+                className={styles.showAside}
+              >
                 {actualBoards.name}
-                <Image src={iconChevronDown} alt="Logo Mobile" ref={myElementRef2}/>
+                <Image src={iconChevronDown} alt="Logo Mobile"/>
               </button>
             </h1>
           </div>
@@ -226,6 +229,14 @@ export default function Header() {
                   titleModal="Add New Task"
                   boardLocal={boardLocal}
                 />
+              )}
+              {showAside && (
+                <div>
+                  <ModalAsideMobile 
+                    isOpen={showAside}
+                    setIsOpen={setShowAside}
+                  />
+                </div>
               )}
             </div>
           </div>

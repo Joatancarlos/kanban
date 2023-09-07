@@ -1,9 +1,11 @@
 export const customStyles = (isDarkMode) => {
   const vw = window.innerWidth;
   let width = 0;
+  let top = '50%';
   switch (true) {
     case vw < 500 :
-      width = '70vw';
+      width = '90vw';
+      top = '45%';
       break;
     case vw < 700:
       width = '65vw';
@@ -24,7 +26,7 @@ export const customStyles = (isDarkMode) => {
     },
     content: {
       width, 
-      top: '50%',
+      top,
       left: '50%',
       right: 'auto',
       bottom: 'auto',

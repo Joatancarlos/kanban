@@ -844,10 +844,27 @@
     justify-content: space-between;
     align-items: center;
     font-size: var(--font-size-xl);
-    color: #FFFFFF;
+    /* color: #FFFFFF; */
   }
 
   .showAside img {
     margin-left: 10px;
+  }
+
+  .editDeleteBox {
+    min-width: 35vw;
+  }
+
+  .divColumns, .newColumn {
+    width: 250px;
+  }
+
+  .modalDivDelete {
+    padding: 8px;
+    width: auto;
+  }
+
+  .containerModalDarkMode .toogleContent {
+    background-color: #21222b;
   }
 }
