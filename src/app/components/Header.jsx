@@ -119,7 +119,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
         <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>
-        <div className={styles.btns_header}>
+        <div className={styles.btns_header} >
           <button 
             className={` ${styles.btn} ${styles.btnPrimaryLight}`}
             onClick={addTask}
