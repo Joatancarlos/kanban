@@ -46,6 +46,9 @@ export default function Header() {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const myElementRef = useRef(null);
+  const myElementRef2 = useRef(null);
+  console.log(myElementRef);
+  console.log(myElementRef2);
   const handleClickOutside = (event) => {
 
     if (myElementRef.current && !myElementRef.current.contains(event.target)) {
@@ -176,7 +179,7 @@ export default function Header() {
             <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>
               <button type="button" className={styles.showAside}>
                 {actualBoards.name}
-                <Image src={iconChevronDown} alt="Logo Mobile" />
+                <Image src={iconChevronDown} alt="Logo Mobile" ref={myElementRef2}/>
               </button>
             </h1>
           </div>
