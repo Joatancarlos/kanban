@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { getSavedBoards } from '@/helpers/boardLocal';
 import styles from '../page.module.css'
 import Image from 'next/image'
-import verticalEllipsis from '../../images/icon-vertical-ellipsis.svg'
-import addTaskMobile from '../../images/icon-add-task-mobile.svg'
+
 import iconChevronDown from '../../images/icon-chevron-down.svg'
 import logoMobile from '../../images/logo-mobile.svg'
 import useStore from '@/zustand/store';
@@ -12,6 +11,7 @@ import EditDeleteBox from './modals/EditDeleteBox';
 import ModalDelete from './modals/ModalDelete';
 import ModalAddTask from './modals/ModalAddTask';
 import ModalAsideMobile from './modals/ModalAsideMobile';
+import ButtonsHeader from './ButtonsHeader';
 
 export default function Header() {
   const [actualBoards,
@@ -47,29 +47,6 @@ export default function Header() {
   const [boardLocal, setBoardLocal] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const [showAside, setShowAside] = useState(false);
-
-  console.log(isVisible, 'isVisible')
-  console.log(isVisibleMobile, 'isVisibleMobile')
-
-  const myElementRef = useRef(null);
-  const myElementRefMobile = useRef(null);
-
-  console.log(myElementRef)
-  console.log(myElementRefMobile)
-  const handleClickOutside = (event) => {
-    console.log('to na função')
-    if (myElementRef.current && !myElementRef.current.contains(event.target)) {
-      setIsVisible(false);
-      console.log('entrei no primeiro if')
-
-    }
-
-    if (myElementRefMobile.current && !myElementRefMobile.current.contains(event.target)) {
-      setIsVisibleMobile(false);
-      console.log('entrei no segundo if')
-    }
-  };
-
   useEffect(() => {
     const boards = getSavedBoards('board');
     if (boards.length !== 0 && boards !== null) {
@@ -84,12 +61,7 @@ export default function Header() {
     }
   }, [modalNewBoard, isDelete]);
 
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  
 
   useEffect(() => {
     const boards = getSavedBoards('board');
@@ -140,28 +112,14 @@ export default function Header() {
     <header className={styles.header}>
         <div className={styles.headerDesk}>
           <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>
-          <div className={styles.btns_header} >
-            <button
-              className={` ${styles.btn} ${styles.btnPrimaryLight}`}
-              onClick={addTask}
-              disabled={isDisabled}
-            >
-              + Add New Task
-            </button>
-            <div className={styles.divElli}>
-              <button
-                onClick={(event) => {
-                  setIsVisible(!isVisible)
-                  event.stopPropagation()
-                }}
-                style={{ padding: '5px' }}
-                disabled={actualBoards.length !== 0 ? false : true}
-                ref={myElementRef}
-              >
-                <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
-              </button>
-            </div>
-          </div>
+          <ButtonsHeader 
+            addTask={addTask}
+            isDisabled={isDisabled}
+            actualBoards={actualBoards}
+            isVisible={isVisible}
+            setIsVisible={setIsVisible}
+            textOrImage="text"
+          />
         </div>
         <div className={styles.headerMobile}>
           <div className={styles.logoMobile}>
@@ -177,45 +135,23 @@ export default function Header() {
               </button>
             </h1>
           </div>
-          <div className={styles.btns_header} >
-            <button
-              className={` ${styles.btn} ${styles.btnPrimaryLight}`}
-              onClick={addTask}
-              disabled={isDisabled}
-            >
-              <Image src={addTaskMobile} alt="Add task Mobile" />
-            </button>
-            <div className={styles.divElli}>
-              <button
-                onClick={(event) => {
-                  setIsVisibleMobile(!isVisibleMobile)
-                  event.stopPropagation()
-                }}
-                style={{ padding: '5px' }}
-                disabled={actualBoards.length !== 0 ? false : true}
-                ref={myElementRefMobile}
-              >
-                <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
-              </button>
-            </div>
-          </div>
+          <ButtonsHeader
+            addTask={addTask}
+            isDisabled={isDisabled}
+            actualBoards={actualBoards}
+            isVisible={isVisibleMobile}
+            setIsVisible={setIsVisibleMobile}
+            textOrImage="image"
+          />
         </div>
-              {isVisible && (
+              {isVisible || isVisibleMobile ? (
                 <EditDeleteBox
                   whosEdit="Board"
                   whosDelete="Board"
                   handleClickEdit={showEditBox}
                   handleClickDelete={showDeleteBox}
                 />
-              )}
-              {isVisibleMobile && (
-                <EditDeleteBox
-                  whosEdit="Board"
-                  whosDelete="Board"
-                  handleClickEdit={showEditBox}
-                  handleClickDelete={showDeleteBox}
-                />
-              )}
+              ): null}
               {modalDeleteBoard && (
                 <ModalDelete
                   boardOrTask={'board'}
