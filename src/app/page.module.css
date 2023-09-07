@@ -24,7 +24,7 @@
   opacity: 0.5;
 }
 
-.header {
+.headerDesk, .headerMobile {
   align-items: center;
   padding: 0 25px;
   display: flex;
@@ -777,6 +777,9 @@
   background-color: #f1f1f1; /* Cor de fundo quando no começo ou no final do conteúdo */
 }
 
+.headerMobile {
+  display: none;
+}
 
 @media (min-width: 700px) and (max-width: 849px) {
   .divColumns, .newColumn {
@@ -801,5 +804,50 @@
   }
   .editDeleteBox {
     min-width: 25vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerMobile {
+    display: flex;
+  }
+  .headerDesk {
+    display: none;
+  }
+
+  .btns_header {
+    width: 90px;
+  }
+
+  .asideContainer {
+    display: none;
+  }
+
+  .logoMobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logoMobile > h1 {
+    margin-left: 15px;
+  }
+  
+  .headerMobile .btn {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .showAside {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-xl);
+    color: #FFFFFF;
+  }
+
+  .showAside img {
+    margin-left: 10px;
   }
 }

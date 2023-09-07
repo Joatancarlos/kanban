@@ -4,6 +4,9 @@ import { getSavedBoards } from '@/helpers/boardLocal';
 import styles from '../page.module.css'
 import Image from 'next/image'
 import verticalEllipsis from '../../images/icon-vertical-ellipsis.svg'
+import addTaskMobile from '../../images/icon-add-task-mobile.svg'
+import iconChevronDown from '../../images/icon-chevron-down.svg'
+import logoMobile from '../../images/logo-mobile.svg'
 import useStore from '@/zustand/store';
 import EditDeleteBox from './modals/EditDeleteBox';
 import ModalDelete from './modals/ModalDelete';
@@ -118,54 +121,110 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-        <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>
-        <div className={styles.btns_header} >
-          <button 
-            className={` ${styles.btn} ${styles.btnPrimaryLight}`}
-            onClick={addTask}
-            disabled={isDisabled}
-          >
-            + Add New Task
-          </button>
-          <div className={styles.divElli}>
+        <div className={styles.headerDesk}>
+          <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>{actualBoards.name}</h1>
+          <div className={styles.btns_header} >
             <button
-              onClick={(event) => {
-                setIsVisible(!isVisible)
-                event.stopPropagation()
-              }}
-              style={{ padding: '5px' }}
-              disabled={actualBoards.length !== 0 ? false : true}
-              ref={myElementRef}
+              className={` ${styles.btn} ${styles.btnPrimaryLight}`}
+              onClick={addTask}
+              disabled={isDisabled}
             >
-              <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
+              + Add New Task
             </button>
-            {isVisible && (
-              <EditDeleteBox
-                whosEdit="Board"
-                whosDelete="Board"
-                handleClickEdit={showEditBox}
-                handleClickDelete={showDeleteBox}
-              />  
-            )}
-
-            {modalDeleteBoard && (
-              <ModalDelete 
-                boardOrTask={'board'}
-                modalDeleteBoard={modalDeleteBoard} 
-                showDeleteBox={showDeleteBox}
-                deleteFunction={deleteBoard}
+            <div className={styles.divElli}>
+              <button
+                onClick={(event) => {
+                  setIsVisible(!isVisible)
+                  event.stopPropagation()
+                }}
+                style={{ padding: '5px' }}
+                disabled={actualBoards.length !== 0 ? false : true}
+                ref={myElementRef}
               >
-                {`Are you sure you want to delete the '${actualBoards.name}' board? This action will remove all columns and tasks and cannot be reversed.`}
-              </ModalDelete>
-            )}
-
-            {isNewTask && (
-              <ModalAddTask 
-                titleModal="Add New Task"
-                boardLocal={boardLocal}
-              />
-            )}
-
+                <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
+              </button>
+              {isVisible && (
+                <EditDeleteBox
+                  whosEdit="Board"
+                  whosDelete="Board"
+                  handleClickEdit={showEditBox}
+                  handleClickDelete={showDeleteBox}
+                />
+              )}
+              {modalDeleteBoard && (
+                <ModalDelete
+                  boardOrTask={'board'}
+                  modalDeleteBoard={modalDeleteBoard}
+                  showDeleteBox={showDeleteBox}
+                  deleteFunction={deleteBoard}
+                >
+                  {`Are you sure you want to delete the '${actualBoards.name}' board? This action will remove all columns and tasks and cannot be reversed.`}
+                </ModalDelete>
+              )}
+              {isNewTask && (
+                <ModalAddTask
+                  titleModal="Add New Task"
+                  boardLocal={boardLocal}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+        <div className={styles.headerMobile}>
+          <div className={styles.logoMobile}>
+            <Image src={logoMobile} alt="Logo Mobile" />
+            <h1 className={isDarkMode ? styles.containerModalDarkMode : ''}>
+              <button type="button" className={styles.showAside}>
+                {actualBoards.name}
+                <Image src={iconChevronDown} alt="Logo Mobile" />
+              </button>
+            </h1>
+          </div>
+          <div className={styles.btns_header} >
+            <button
+              className={` ${styles.btn} ${styles.btnPrimaryLight}`}
+              onClick={addTask}
+              disabled={isDisabled}
+            >
+              <Image src={addTaskMobile} alt="Add task Mobile" />
+            </button>
+            <div className={styles.divElli}>
+              <button
+                onClick={(event) => {
+                  setIsVisible(!isVisible)
+                  event.stopPropagation()
+                }}
+                style={{ padding: '5px' }}
+                disabled={actualBoards.length !== 0 ? false : true}
+                ref={myElementRef}
+              >
+                <Image src={verticalEllipsis} alt="Vertical Ellipsis" />
+              </button>
+              {isVisible && (
+                <EditDeleteBox
+                  whosEdit="Board"
+                  whosDelete="Board"
+                  handleClickEdit={showEditBox}
+                  handleClickDelete={showDeleteBox}
+                />
+              )}
+              {modalDeleteBoard && (
+                <ModalDelete
+                  boardOrTask={'board'}
+                  modalDeleteBoard={modalDeleteBoard}
+                  showDeleteBox={showDeleteBox}
+                  deleteFunction={deleteBoard}
+                >
+                  {`Are you sure you want to delete the '${actualBoards.name}' board? This action will remove all columns and tasks and cannot be reversed.`}
+                </ModalDelete>
+              )}
+              {isNewTask && (
+                <ModalAddTask
+                  titleModal="Add New Task"
+                  boardLocal={boardLocal}
+                />
+              )}
+            </div>
           </div>
         </div>
     </header>
