@@ -18,7 +18,7 @@ export const customStyles = (isDarkMode) => {
         width = '40vw';
         break;
       default:
-        width = '38vw';
+        width = '40vw';
         break;
     }
     return {

@@ -867,4 +867,21 @@
   .containerModalDarkMode .toogleContent {
     background-color: #21222b;
   }
+
+  .mainEmptyBoard {
+    padding: 0 20px;
+  }
+  .emptyBoard {
+    height: 18vh;
+    align-items: center;
+  }
+
+  .emptyBoard > p{
+    font-weight: 700;
+    text-align: center;
+    font-size: var(--font-size-l);
+  }
+  .emptyBoard > button {
+    min-width: 150px;
+  }
 }
